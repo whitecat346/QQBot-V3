@@ -455,4 +455,9 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+# Vim
+*.swp
+*.un~
+*.**~
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,c++,visualstudio
