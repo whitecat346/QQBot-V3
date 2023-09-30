@@ -9,8 +9,18 @@ hv::WebSocketClient wsclient;
 
 void OnMessage(const std::string &msg)
 {
-		nlohmann::json omMsg = nlohmann::json::parse(msg);
-		if( )
+		if(msg[0] == '$')
+		{
+			std::string temp;
+			for ( int i = msg.find(' ') + 1; i < msg.length(); i++ )
+				temp += msg [i];
+			wsclient.send(temp);
+		}
+		else
+		{
+			nlohmann::json omMsg = nlohmann::json::parse(msg);
+			
+		}
 }
 
 void OnOpen()
@@ -18,7 +28,7 @@ void OnOpen()
 	
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	// WebSocket Client Set
 	reconn_setting_t reconn;
@@ -36,6 +46,7 @@ int main()
 		};
 
 	// Port Input
+	if (argc == 0 )
 	{
 		std::string port;
 		int iport = 0;
@@ -56,6 +67,16 @@ int main()
 		else
 		{
 			std::cout << "Port not good!" << std::endl;
+			exit(0);
+		}
+	}
+	else
+	{
+		if (argv[1] == "-url")
+			wsclient.open(argv[2]);
+		else
+		{
+			std::cout << "Command Error!" << std::endl;
 			exit(0);
 		}
 	}
