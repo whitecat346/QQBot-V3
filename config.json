@@ -1,0 +1,10 @@
+{
+	"function": [
+		"fecho",
+		"fcave"
+	],
+	"endis": {
+		"fecho": true,
+		"fcave": true
+	}
+}

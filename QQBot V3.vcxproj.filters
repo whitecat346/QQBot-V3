@@ -35,5 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitgnore" />
+    <None Include="config.json" />
   </ItemGroup>
 </Project>

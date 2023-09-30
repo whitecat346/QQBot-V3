@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitgnore" />
+    <None Include="config.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

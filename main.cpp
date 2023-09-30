@@ -2,19 +2,33 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <map>
 #include "include/hv/json.hpp"
 #include "include/hv/WebSocketClient.h"
+#include "include/string/function.h"
+#include "include/function/function.h"
 
 typedef void( *fun ) ( std::string& msg );
 
 hv::WebSocketClient wsclient;
-std::map<int,fun>  funIndex;
+std::map<std::string, int>  funIndex;
 std::map<int, bool> funED;
+
+fun findex [] = { qqBot::fecho, qqBot::fcave };
 
 void openSet()
 {
-	
+	std::ifstream cfg("config.json");
+	nlohmann::json jtemp = nlohmann::json::parse(cfg);
+	cfg.close();
+
+	// Map Set
+	for (int i = 0; i < jtemp.at("function").size(); i++ )
+	{
+		funIndex.insert(std::pair<std::string, int>(str::jrs_to_string(jtemp.at("function").at(i)), i));
+		funED.insert(std::pair<int, bool>(i, jtemp.at("function").at(i)));
+	}
 }
 
 void OnMessage(const std::string &msg)
@@ -32,6 +46,7 @@ void OnMessage(const std::string &msg)
 			if (omMsg.at("message").at(0) == '#')
 			{
 				std::string msgInfo = omMsg.at("message");
+
 			}
 		}
 }

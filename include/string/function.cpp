@@ -8,3 +8,5 @@ std::string str::getFunName(std::string in)
 		out += in.at(i);
 	return out;
 }
+
+std::string str::jrs_to_string(std::string in) { return in; }
