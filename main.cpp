@@ -66,19 +66,32 @@ int main(int argc, char** argv)
 	}
 	else
 	{
-		bool bfin = false;
-		for ( int i = 1; i < argc; i++ )
+		int index [2] = {0,0};
+		for ( int i = 1; i <= argc; i++ )
 		{
-			if ( argv [i] == "-cq" || argv [i] == "-fs" )
-			{
-				bfin = true;
-				break;
-			}
+			if ( argv [i] == "-cq" )
+				index [0] = i;
+			else if ( argv [i] == "-fs" )
+				index [1] = i;
 		}
-		if (bfin == true)
+
+		// go-cqhttp Connect
+		if (index[0] != 0)
 		{
-			std::string temp = argv [2];
+			std::string temp = argv [index[0] + 1];
 			wsclient.open(("ws://127.0.0.1:" + temp).c_str());
+		}
+		else
+		{
+			std::cout << "Command Error!" << std::endl;
+			exit(0);
+		}
+
+		// File Server Connect
+		if (index[1] != 0)
+		{
+			std::string temp = argv [index [1] + 1];
+			wsclient.open(( "ws://127.0.0.1:" + temp ).c_str());
 		}
 		else
 		{
