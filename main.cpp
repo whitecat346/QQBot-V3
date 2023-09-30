@@ -13,7 +13,7 @@ typedef void( *fun ) ( std::string& msg );
 
 hv::WebSocketClient wsclient;
 std::map<std::string, int>  funIndex;
-std::map<int, bool> funED;
+std::map<std::string, bool> funED;
 
 fun findex [] = { qqBot::fecho, qqBot::fcave };
 
@@ -26,8 +26,9 @@ void openSet()
 	// Map Set
 	for (int i = 0; i < jtemp.at("function").size(); i++ )
 	{
-		funIndex.insert(std::pair<std::string, int>(str::jrs_to_string(jtemp.at("function").at(i)), i));
-		funED.insert(std::pair<int, bool>(i, jtemp.at("function").at(i)));
+		funIndex.insert(std::pair<std::string, int>(str::jrs_to_string(jtemp.at("function").at(i)),i));
+		funED.insert(std::pair<std::string, bool>(str::jrs_to_string(jtemp.at("function").at(i)),
+			jtemp.at("endis").at(i)));
 	}
 }
 
@@ -43,10 +44,40 @@ void OnMessage(const std::string &msg)
 		else
 		{
 			nlohmann::json omMsg = nlohmann::json::parse(msg);
-			if (omMsg.at("message").at(0) == '#')
+			if (omMsg.find("post_type") != omMsg.end())
 			{
-				std::string msgInfo = omMsg.at("message");
-
+				if (omMsg.at("message").at(0) == '#')
+				{
+					int group_id = omMsg.at("group_id");
+					std::string msgInfo = omMsg.at("message");
+					std::map<std::string, int>::iterator it = funIndex.find(str::getFunName(msgInfo));
+					if (it != funIndex.end() )
+					{
+						if (funED.at(str::getFunName(msgInfo)) == true)
+						{
+							std::string sendTemp = msg;
+							findex [funIndex [str::getFunName(msgInfo)]](sendTemp);
+							if (sendTemp.at(0) == '$')
+							{
+								
+							}
+						}
+						else
+						{
+							wsclient.send("{\"action\":\"send_group_msg\",\"params\":{\"group_id\":"
+								+ std::to_string(group_id)
+								+ ",\"message\":\"[ERROR] 功能未启用！"
+								+ "\"}}");
+						}
+					}
+					else
+					{
+						wsclient.send("{\"action\":\"send_group_msg\",\"params\":{\"group_id\":"
+						+ std::to_string(group_id)
+						+ ",\"message\":\"[ERROR] 功能未找到！"
+						+ "\"}}");
+					}
+				}
 			}
 		}
 }
