@@ -21,9 +21,15 @@
     <ClCompile Include="include\function\function.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="include\string\function.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\function\function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\string\function.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
