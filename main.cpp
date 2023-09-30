@@ -79,7 +79,9 @@ int main(int argc, char** argv)
 		if (index[0] != 0)
 		{
 			std::string temp = argv [index[0] + 1];
+			std::cout << "Try to connect the go-cqhttp...  ";
 			wsclient.open(("ws://127.0.0.1:" + temp).c_str());
+			std::cout << "done!" << std::endl;
 		}
 		else
 		{
@@ -91,7 +93,9 @@ int main(int argc, char** argv)
 		if (index[1] != 0)
 		{
 			std::string temp = argv [index [1] + 1];
+			std::cout << "Try to connect the file server...  ";
 			wsclient.open(( "ws://127.0.0.1:" + temp ).c_str());
+			std::cout << "done!" << std::endl;
 		}
 		else
 		{
