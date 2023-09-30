@@ -2,10 +2,20 @@
 
 #include <iostream>
 #include <string>
+#include <map>
 #include "include/hv/json.hpp"
 #include "include/hv/WebSocketClient.h"
 
+typedef void( *fun ) ( std::string& msg );
+
 hv::WebSocketClient wsclient;
+std::map<int,fun>  funIndex;
+std::map<int, bool> funED;
+
+void openSet()
+{
+	
+}
 
 void OnMessage(const std::string &msg)
 {
@@ -19,7 +29,10 @@ void OnMessage(const std::string &msg)
 		else
 		{
 			nlohmann::json omMsg = nlohmann::json::parse(msg);
-			
+			if (omMsg.at("message").at(0) == '#')
+			{
+				
+			}
 		}
 }
 
@@ -48,32 +61,25 @@ int main(int argc, char** argv)
 	// Port Input
 	if (argc == 0 )
 	{
-		std::string port;
-		int iport = 0;
-		std::cout << "Please Input Server Port" << std::endl;
-		std::cin >> port;
-		for (int i = 0; i < port.size(); i++ )
-		{
-			if (!isdigit(port.at(i)) )
-			{
-				std::cout << "Port at " << std::to_string(i) << " is not digit!" << std::endl;
-				exit(0);
-			}
-		}
-		std::istringstream iss(port);
-		iss >> iport;
-		if (iport >= 0 && iport <= 65535)
-			wsclient.open(( "ws://127.0.0.1:" + std::to_string(iport) + "/" ).c_str());
-		else
-		{
-			std::cout << "Port not good!" << std::endl;
-			exit(0);
-		}
+		std::cout << "No Command!" << std::endl;
+		exit(0);
 	}
 	else
 	{
-		if (argv[1] == "-url")
-			wsclient.open(argv[2]);
+		bool bfin = false;
+		for ( int i = 1; i < argc; i++ )
+		{
+			if ( argv [i] == "-cq" || argv [i] == "-fs" )
+			{
+				bfin = true;
+				break;
+			}
+		}
+		if (bfin == true)
+		{
+			std::string temp = argv [2];
+			wsclient.open(("ws://127.0.0.1:" + temp).c_str());
+		}
 		else
 		{
 			std::cout << "Command Error!" << std::endl;
