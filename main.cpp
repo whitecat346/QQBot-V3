@@ -31,7 +31,7 @@ void OnMessage(const std::string &msg)
 			nlohmann::json omMsg = nlohmann::json::parse(msg);
 			if (omMsg.at("message").at(0) == '#')
 			{
-				
+				std::string msgInfo = omMsg.at("message");
 			}
 		}
 }
