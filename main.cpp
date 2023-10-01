@@ -40,6 +40,12 @@ void openSet()
 	}
 }
 
+void closeFunction(int closeCode = 0)
+{
+	wsclient.close();
+	exit(closeCode);
+}
+
 void OnMessage(const std::string &msg)
 {
 		if(msg[0] == '$')
@@ -67,7 +73,16 @@ void OnMessage(const std::string &msg)
 							findex [funIndex [str::getFunName(msgInfo)]](sendTemp);
 							if (str::getFunName(sendTemp) == "send")
 							{
-								
+								it = fileIndex.find(str::fileServerGetFunctionName(sendTemp));
+								if (it != fileIndex.end() )
+								{
+									
+								}
+								else
+								{
+									std::cout << "FileServer Command Not Found!" << std::endl;
+									closeFunction(0);
+								}
 							}
 						}
 						else
