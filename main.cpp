@@ -121,7 +121,7 @@ int main(int argc, char** argv)
 	// Start
 	openSet();
 
-	// Not Exit
+	// No Exit
 	while ( true );
 
 	return 0;
