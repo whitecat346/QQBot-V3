@@ -14,8 +14,10 @@ typedef void( *fun ) ( std::string& msg );
 hv::WebSocketClient wsclient;
 std::map<std::string, int>  funIndex;
 std::map<std::string, bool> funED;
+std::map<std::string, int> fileIndex;
 
 fun findex [] = { qqBot::fecho, qqBot::fcave };
+fun fs [] = { fileServer::fscave };
 
 void openSet()
 {
@@ -23,13 +25,18 @@ void openSet()
 	nlohmann::json jtemp = nlohmann::json::parse(cfg);
 	cfg.close();
 
-	// Map Set
-	for (int i = 0; i < jtemp.at("function").size(); i++ )
+	// Bot function index load
+	for (int i = 0; i < jtemp.at("Bot").at("function").size(); i++ )
 	{
-		funIndex.insert(std::pair<std::string, int>(jtemp.at("Bot").at("function"),
+		funIndex.insert(std::pair<std::string, int>(jtemp.at("Bot").at("function").at(i),
 			i));
-		funED.insert(std::pair<std::string, bool>(,
+		funED.insert(std::pair<std::string, bool>(jtemp.at("Bot").at("endis").at(i),
 			jtemp.at("Bot").at("endis").at(i)));
+	}
+	// File Server function index load
+	for (int i = 0; i < jtemp.at("FileServer").at("function").size(); i++ )
+	{
+		fileIndex.insert(std::pair<std::string, int>(jtemp.at("FileServer").at("function").at(i), i));
 	}
 }
 
@@ -58,7 +65,7 @@ void OnMessage(const std::string &msg)
 						{
 							std::string sendTemp = msg;
 							findex [funIndex [str::getFunName(msgInfo)]](sendTemp);
-							if (sendTemp.at(0) == '$')
+							if (str::getFunName(sendTemp) == "send")
 							{
 								
 							}

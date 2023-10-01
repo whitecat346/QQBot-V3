@@ -1,7 +1,7 @@
 #include "function.h"
 #include <string>
 
-void fileServer::cave(std::string& msg)
+void fileServer::fscave(std::string& msg)
 {
 	
 }

@@ -4,7 +4,7 @@
 
 namespace fileServer
 {
-	void cave(std::string& msg);
+	void fscave(std::string& msg);
 }
 
 namespace qqBot

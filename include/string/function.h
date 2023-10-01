@@ -2,6 +2,7 @@
 
 namespace str
 {
-	std::string getFunName(std::string in);
-	std::string jrs_to_string(std::string in);
+	inline std::string getFunName(std::string in);
+	inline std::string jrs_to_string(std::string in);
+	inline std::string fileServerGetFunctionName(std::string in);
 }
