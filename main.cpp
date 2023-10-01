@@ -12,6 +12,7 @@
 typedef void( *fun ) ( std::string& msg );
 
 hv::WebSocketClient wsclient;
+hv::WebSocketClient wsfileServer;
 std::map<std::string, int>  funIndex;
 std::map<std::string, bool> funED;
 std::map<std::string, int> fileIndex;
@@ -76,7 +77,9 @@ void OnMessage(const std::string &msg)
 								it = fileIndex.find(str::fileServerGetFunctionName(sendTemp));
 								if (it != fileIndex.end() )
 								{
-									
+									sendTemp = str::fileServerGetInfo(sendTemp);
+									fs [fileIndex [str::fileServerGetFunctionName(sendTemp)]](sendTemp);
+									wsclient.send(sendTemp);
 								}
 								else
 								{
@@ -163,7 +166,7 @@ int main(int argc, char** argv)
 		{
 			std::string temp = argv [index [1] + 1];
 			std::cout << "Try to connect the file server...  ";
-			wsclient.open(( "ws://127.0.0.1:" + temp ).c_str());
+			wsfileServer.open(( "ws://127.0.0.1:" + temp ).c_str());
 			std::cout << "done!" << std::endl;
 		}
 		else
