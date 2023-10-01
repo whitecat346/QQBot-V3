@@ -133,11 +133,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\function\cqmsg.cpp" />
     <ClCompile Include="include\function\function.cpp" />
     <ClCompile Include="include\string\function.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\function\cqmsg.h" />
     <ClInclude Include="include\function\function.h" />
     <ClInclude Include="include\hv\AsyncHttpClient.h" />
     <ClInclude Include="include\hv\axios.h" />

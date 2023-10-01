@@ -43,6 +43,7 @@ void openSet()
 void closeFunction(int closeCode = 0)
 {
 	wsclient.close();
+	wsfileServer.close();
 	exit(closeCode);
 }
 
@@ -65,6 +66,11 @@ int main(int argc, char** argv)
 
 	wsfileServer.onmessage = fileServer::OnMessage;
 	wsfileServer.onopen = fileServer::OnOpen;
+	wsfileServer.onclose = [ ] ()
+		{
+			std::cout << "File Server OnClose!";
+			exit(0);
+		};
 
 	// Port Input
 	if (argc == 0 )
