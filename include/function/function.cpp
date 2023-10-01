@@ -4,6 +4,8 @@
 #include "../hv/WebSocketClient.h"
 #include "../string/function.h"
 
+#include "cqmsg.h"
+
 // File Server
 
 // WebSocket Message
@@ -96,7 +98,8 @@ void qqBot::OnMessage(const std::string& msg)
 void qqBot::fecho(std::string& msg)
 {
 	nlohmann::json jmsg = nlohmann::json::parse(msg);
-	std::string message = str::BotFunction::EchoMessageGet(jmsg.at("message"));
+	msg = cqmsg::BotGroupMessageSend(jmsg.at("group_id"),
+		str::BotFunction::EchoMessageGet(jmsg.at("message")));
 }
 
 void qqBot::fcave(std::string& msg)
