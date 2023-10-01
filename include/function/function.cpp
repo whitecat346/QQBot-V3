@@ -100,7 +100,7 @@ void qqBot::OnMessage(const std::string& msg)
 	{
 		if ( omMsg.find("data") != omMsg.end() )
 		{
-			
+			std::cout << "OK!  Reply Message: "  << omMsg.at("data") << std::endl;
 		}
 		else
 		{
