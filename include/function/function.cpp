@@ -47,7 +47,11 @@ void qqBot::OnOpen()
 void qqBot::OnMessage(const std::string& msg)
 {
 	nlohmann::json omMsg = nlohmann::json::parse(msg);
-	if ( omMsg.find("post_type") != omMsg.end() )
+	if ( omMsg.find("echo") != omMsg.end() && omMsg.at("echo") == "onopen")
+	{
+		
+	}
+	else if ( omMsg.find("post_type") != omMsg.end() )
 	{
 		if (omMsg.at("post_type") == "message" && omMsg.at("message").at(0) == '#' )
 		{
@@ -90,6 +94,22 @@ void qqBot::OnMessage(const std::string& msg)
 				+ ",\"message\":\"[ERROR] 功能未找到！"
 				+ "\"}}");
 			}
+		}
+	}
+	else if ( omMsg.find("status") != omMsg.end() )
+	{
+		if ( omMsg.find("data") != omMsg.end() )
+		{
+			
+		}
+		else
+		{
+			if ( omMsg.at("status") == "ok" && omMsg.at("retcode") == 0 )
+				std::cout << "OK!" << std::endl;
+			else if ( omMsg.at("status") == "async" && omMsg.at("retcode") == 1 )
+				std::cout << "ASYNC!" << std::endl;
+			else if ( omMsg.at("status") == "failed" && omMsg.at("retcode") != 0 && omMsg.at("retcode") != 1 )
+				std::cout << "FATAL!  INFO: " << omMsg.at("msg") << " & " << omMsg.at("wording") << std::endl;
 		}
 	}
 }
