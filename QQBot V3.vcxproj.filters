@@ -32,6 +32,213 @@
     <ClInclude Include="include\string\function.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\hv\AsyncHttpClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\axios.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\base64.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\Buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\Channel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\Event.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\EventLoop.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\EventLoopThread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\EventLoopThreadPool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hasync.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hatomic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hbase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hbuf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hconfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hdef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hdir.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hendian.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\herr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hexport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hfile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hlog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hloop.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hmain.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hmap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hmath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hmutex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hobjectpool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hpath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hplatform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hproc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hscope.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hsocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hssl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hstring.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hsysinfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hthread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hthreadpool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\htime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\http_content.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\HttpClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\HttpContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\httpdef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\HttpMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\HttpParser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\HttpResponseWriter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\HttpServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\HttpService.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hurl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\hversion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\ifconfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\iniparser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\json.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\md5.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\nlog.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\requests.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\sha1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\singleton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\Status.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\TcpClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\TcpServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\ThreadLocalStorage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\UdpClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\UdpServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\WebSocketChannel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\WebSocketClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\WebSocketParser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\WebSocketServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hv\wsdef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitgnore" />

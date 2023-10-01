@@ -26,9 +26,10 @@ void openSet()
 	// Map Set
 	for (int i = 0; i < jtemp.at("function").size(); i++ )
 	{
-		funIndex.insert(std::pair<std::string, int>(str::jrs_to_string(jtemp.at("function").at(i)),i));
-		funED.insert(std::pair<std::string, bool>(str::jrs_to_string(jtemp.at("function").at(i)),
-			jtemp.at("endis").at(i)));
+		funIndex.insert(std::pair<std::string, int>(jtemp.at("Bot").at("function"),
+			i));
+		funED.insert(std::pair<std::string, bool>(,
+			jtemp.at("Bot").at("endis").at(i)));
 	}
 }
 
