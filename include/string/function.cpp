@@ -18,3 +18,8 @@ inline std::string str::fileServerGetFunctionName(std::string in)
 		out += in.at(i);
 	return out;
 }
+
+inline std::string str::fileServerGetInfo(std::string in)
+{
+		
+}
