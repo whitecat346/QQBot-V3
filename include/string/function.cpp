@@ -26,3 +26,11 @@ inline std::string str::fileServerGetInfo(std::string in)
 		out += in.at(i);
 	return out;
 }
+
+inline std::string str::BotFunction::EchoMessageGet(std::string in)
+{
+	std::string out;
+	for ( int i = in.find(' '); i < in.length(); i++ )
+		out += in.at(i);
+	return out;
+}

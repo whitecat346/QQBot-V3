@@ -47,7 +47,7 @@ void qqBot::OnMessage(const std::string& msg)
 	nlohmann::json omMsg = nlohmann::json::parse(msg);
 	if ( omMsg.find("post_type") != omMsg.end() )
 	{
-		if ( omMsg.at("message").at(0) == '#' )
+		if (omMsg.at("post_type") == "message" && omMsg.at("message").at(0) == '#' )
 		{
 			int group_id = omMsg.at("group_id");
 			std::string msgInfo = omMsg.at("message");
@@ -60,8 +60,7 @@ void qqBot::OnMessage(const std::string& msg)
 					findex [funIndex ["f" + str::getFunName(msgInfo)]](sendTemp);
 					if ( str::getFunName(sendTemp) == "send" )
 					{
-						it = fileIndex.find(str::fileServerGetFunctionName(sendTemp));
-						if ( it != fileIndex.end() )
+						if ( it = fileIndex.find(str::fileServerGetFunctionName(sendTemp)); it != fileIndex.end() )
 						{
 							sendTemp = str::fileServerGetInfo(sendTemp);
 							fs [fileIndex ["fs" + str::fileServerGetFunctionName(sendTemp)]](sendTemp);
@@ -96,7 +95,8 @@ void qqBot::OnMessage(const std::string& msg)
 // Function
 void qqBot::fecho(std::string& msg)
 {
-
+	nlohmann::json jmsg = nlohmann::json::parse(msg);
+	std::string message = str::BotFunction::EchoMessageGet(jmsg.at("message"));
 }
 
 void qqBot::fcave(std::string& msg)
