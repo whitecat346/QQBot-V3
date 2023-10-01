@@ -75,21 +75,42 @@ int main(int argc, char** argv)
 	// Port Input
 	if ( argc == 0 )
 	{
-		std::cout << "Not Found Command. Please Input GO-CqHTTP Port: ";
-		std::string sPort;
-		std::cin >> sPort;
-		for ( int i = 0; i < sPort.size(); i++ )
-			if ( !isdigit(sPort.at(i)) ) throw( "Port Have No Digit Char" );
-
-		std::istringstream sti(sPort);
 		unsigned int iport = 0;
-		sti >> iport;
+		std::string sPort;
+		std::cout << "Not Found Command. ";
 
-		if ( iport >= 1 && iport <= 65535 )
+		for ( int i = 0; i < 2; i++ )
 		{
+			if ( i == 0 ) std::cout << "Please Input GO-CqHTTP Port: ";
+			else if ( i == 1 ) std::cout << "Please Input File Server Port: ";
 
+			std::cin >> sPort;
+			for ( int i = 0; i < sPort.size(); i++ )
+				if ( !isdigit(sPort.at(i)) ) throw( "Port Have No Digit Char" );
+
+			std::istringstream sti(sPort);
+			sti >> iport;
+
+			if ( iport >= 1 && iport <= 65535 )
+			{
+				if ( i == 0 )
+				{
+					std::cout << "Connect On Bot...";
+					wsclient.open(( "ws://127.0.0.1:" + std::to_string(iport) ).c_str());
+					sPort.clear();
+					iport = 0;
+					std::cout << "Done!" << std::endl;
+				}
+				else if ( i == 1 )
+				{
+					std::cout << "Connect On File Server...";
+					wsfileServer.open(( "ws://127.0.0.1:" + std::to_string(iport) ).c_str());
+					std::cout << "Done!" << std::endl;
+				}
+			}
+			}
+			else throw( "Out Of Memory!" );
 		}
-		else throw( "Out Of Memory!" );
 	}
 
 	// Start
