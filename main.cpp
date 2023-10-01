@@ -108,8 +108,16 @@ int main(int argc, char** argv)
 					std::cout << "Done!" << std::endl;
 				}
 			}
-			}
 			else throw( "Out Of Memory!" );
+		}
+	}
+	else
+	{
+		std::cout << "Have Command! Will use command to connect servers!" << std::endl;
+		if ( argv[1] == "-cq" )
+		{
+			// TODO: add score code
+			// connect on servers
 		}
 	}
 
