@@ -64,6 +64,7 @@ int main(int argc, char** argv)
 		};
 
 	wsfileServer.onmessage = fileServer::OnMessage;
+	wsfileServer.onopen = fileServer::OnOpen;
 
 	// Port Input
 	if (argc == 0 )

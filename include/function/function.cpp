@@ -12,6 +12,10 @@ void fileServer::OnMessage(const std::string& msg)
 	
 }
 
+void fileServer::OnOpen()
+{
+	
+}
 
 void fileServer::fscave(std::string& msg)
 {

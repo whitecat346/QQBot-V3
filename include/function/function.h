@@ -6,6 +6,7 @@ namespace fileServer
 {
 	// WebSocket Message
 	void OnMessage(const std::string& msg);
+	void OnOpen();
 
 	// Function
 	void fscave(std::string& msg);
