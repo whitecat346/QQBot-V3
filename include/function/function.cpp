@@ -57,14 +57,14 @@ void qqBot::OnMessage(const std::string& msg)
 				if ( funED.at(str::getFunName(msgInfo)) == true )
 				{
 					std::string sendTemp = msg;
-					findex [funIndex [str::getFunName(msgInfo)]](sendTemp);
+					findex [funIndex ["f" + str::getFunName(msgInfo)]](sendTemp);
 					if ( str::getFunName(sendTemp) == "send" )
 					{
 						it = fileIndex.find(str::fileServerGetFunctionName(sendTemp));
 						if ( it != fileIndex.end() )
 						{
 							sendTemp = str::fileServerGetInfo(sendTemp);
-							fs [fileIndex [str::fileServerGetFunctionName(sendTemp)]](sendTemp);
+							fs [fileIndex ["fs" + str::fileServerGetFunctionName(sendTemp)]](sendTemp);
 							wsfileServer.send(sendTemp);
 						}
 						else

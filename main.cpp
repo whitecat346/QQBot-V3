@@ -26,7 +26,7 @@ void openSet()
 	cfg.close();
 
 	// Bot function index load
-	for (int i = 0; i < jtemp.at("Bot").at("function").size(); i++ )
+	for ( int i = 0; i < jtemp.at("Bot").at("function").size(); i++ )
 	{
 		funIndex.insert(std::pair<std::string, int>(jtemp.at("Bot").at("function").at(i),
 			i));
@@ -34,7 +34,7 @@ void openSet()
 			jtemp.at("Bot").at("endis").at(i)));
 	}
 	// File Server function index load
-	for (int i = 0; i < jtemp.at("FileServer").at("function").size(); i++ )
+	for ( int i = 0; i < jtemp.at("FileServer").at("function").size(); i++ )
 	{
 		fileIndex.insert(std::pair<std::string, int>(jtemp.at("FileServer").at("function").at(i), i));
 	}
@@ -73,14 +73,14 @@ int main(int argc, char** argv)
 		};
 
 	// Port Input
-	if (argc == 0 )
+	if ( argc == 0 )
 	{
 		std::cout << "No Command!" << std::endl;
 		exit(0);
 	}
 	else
 	{
-		int index [2] = {0,0};
+		int index [2] = { 0,0 };
 		for ( int i = 1; i <= argc; i++ )
 		{
 			if ( argv [i] == "-cq" )
@@ -90,11 +90,11 @@ int main(int argc, char** argv)
 		}
 
 		// go-cqhttp Connect
-		if (index[0] != 0)
+		if ( index [0] != 0 )
 		{
-			std::string temp = argv [index[0] + 1];
+			std::string temp = argv [index [0] + 1];
 			std::cout << "Try to connect the go-cqhttp...  ";
-			wsclient.open(("ws://127.0.0.1:" + temp).c_str());
+			wsclient.open(( "ws://127.0.0.1:" + temp ).c_str());
 			std::cout << "done!" << std::endl;
 		}
 		else
@@ -104,7 +104,7 @@ int main(int argc, char** argv)
 		}
 
 		// File Server Connect
-		if (index[1] != 0)
+		if ( index [1] != 0 )
 		{
 			std::string temp = argv [index [1] + 1];
 			std::cout << "Try to connect the file server...  ";
