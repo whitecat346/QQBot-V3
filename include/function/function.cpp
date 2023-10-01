@@ -30,6 +30,7 @@ typedef void( *fun ) ( std::string& msg );
 extern fun findex [];
 extern fun fs [];
 extern hv::WebSocketClient wsclient;
+extern hv::WebSocketClient wsfileServer;
 extern std::map<std::string, int> funIndex;
 extern std::map<std::string, bool> funED;
 extern std::map<std::string, int> fileIndex;
@@ -43,60 +44,50 @@ void qqBot::OnOpen()
 
 void qqBot::OnMessage(const std::string& msg)
 {
-	if ( msg [0] == '$' )
+	nlohmann::json omMsg = nlohmann::json::parse(msg);
+	if ( omMsg.find("post_type") != omMsg.end() )
 	{
-		std::string temp;
-		for ( int i = msg.find(' ') + 1; i < msg.length(); i++ )
-			temp += msg [i];
-		wsclient.send(temp);
-	}
-	else
-	{
-		nlohmann::json omMsg = nlohmann::json::parse(msg);
-		if ( omMsg.find("post_type") != omMsg.end() )
+		if ( omMsg.at("message").at(0) == '#' )
 		{
-			if ( omMsg.at("message").at(0) == '#' )
+			int group_id = omMsg.at("group_id");
+			std::string msgInfo = omMsg.at("message");
+			std::map<std::string, int>::iterator it = funIndex.find(str::getFunName(msgInfo));
+			if ( it != funIndex.end() )
 			{
-				int group_id = omMsg.at("group_id");
-				std::string msgInfo = omMsg.at("message");
-				std::map<std::string, int>::iterator it = funIndex.find(str::getFunName(msgInfo));
-				if ( it != funIndex.end() )
+				if ( funED.at(str::getFunName(msgInfo)) == true )
 				{
-					if ( funED.at(str::getFunName(msgInfo)) == true )
+					std::string sendTemp = msg;
+					findex [funIndex [str::getFunName(msgInfo)]](sendTemp);
+					if ( str::getFunName(sendTemp) == "send" )
 					{
-						std::string sendTemp = msg;
-						findex [funIndex [str::getFunName(msgInfo)]](sendTemp);
-						if ( str::getFunName(sendTemp) == "send" )
+						it = fileIndex.find(str::fileServerGetFunctionName(sendTemp));
+						if ( it != fileIndex.end() )
 						{
-							it = fileIndex.find(str::fileServerGetFunctionName(sendTemp));
-							if ( it != fileIndex.end() )
-							{
-								sendTemp = str::fileServerGetInfo(sendTemp);
-								fs [fileIndex [str::fileServerGetFunctionName(sendTemp)]](sendTemp);
-								wsclient.send(sendTemp);
-							}
-							else
-							{
-								std::cout << "FileServer Command Not Found!" << std::endl;
-								closeFunction(0);
-							}
+							sendTemp = str::fileServerGetInfo(sendTemp);
+							fs [fileIndex [str::fileServerGetFunctionName(sendTemp)]](sendTemp);
+							wsfileServer.send(sendTemp);
 						}
-					}
-					else
-					{
-						wsclient.send("{\"action\":\"send_group_msg\",\"params\":{\"group_id\":"
-							+ std::to_string(group_id)
-							+ ",\"message\":\"[ERROR] 功能未启用！"
-							+ "\"}}");
+						else
+						{
+							std::cout << "FileServer Command Not Found!" << std::endl;
+							closeFunction(0);
+						}
 					}
 				}
 				else
 				{
 					wsclient.send("{\"action\":\"send_group_msg\",\"params\":{\"group_id\":"
-					+ std::to_string(group_id)
-					+ ",\"message\":\"[ERROR] 功能未找到！"
-					+ "\"}}");
+						+ std::to_string(group_id)
+						+ ",\"message\":\"[ERROR] 功能未启用！"
+						+ "\"}}");
 				}
+			}
+			else
+			{
+				wsclient.send("{\"action\":\"send_group_msg\",\"params\":{\"group_id\":"
+				+ std::to_string(group_id)
+				+ ",\"message\":\"[ERROR] 功能未找到！"
+				+ "\"}}");
 			}
 		}
 	}
