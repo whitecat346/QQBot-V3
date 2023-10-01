@@ -75,47 +75,21 @@ int main(int argc, char** argv)
 	// Port Input
 	if ( argc == 0 )
 	{
-		std::cout << "No Command!" << std::endl;
-		exit(0);
-	}
-	else
-	{
-		int index [2] = { 0,0 };
-		for ( int i = 1; i <= argc; i++ )
-		{
-			if ( argv [i] == "-cq" )
-				index [0] = i;
-			else if ( argv [i] == "-fs" )
-				index [1] = i;
-		}
+		std::cout << "Not Found Command. Please Input GO-CqHTTP Port: ";
+		std::string sPort;
+		std::cin >> sPort;
+		for ( int i = 0; i < sPort.size(); i++ )
+			if ( !isdigit(sPort.at(i)) ) throw( "Port Have No Digit Char" );
 
-		// go-cqhttp Connect
-		if ( index [0] != 0 )
-		{
-			std::string temp = argv [index [0] + 1];
-			std::cout << "Try to connect the go-cqhttp...  ";
-			wsclient.open(( "ws://127.0.0.1:" + temp ).c_str());
-			std::cout << "done!" << std::endl;
-		}
-		else
-		{
-			std::cout << "Command Error!" << std::endl;
-			exit(0);
-		}
+		std::istringstream sti(sPort);
+		unsigned int iport = 0;
+		sti >> iport;
 
-		// File Server Connect
-		if ( index [1] != 0 )
+		if ( iport >= 1 && iport <= 65535 )
 		{
-			std::string temp = argv [index [1] + 1];
-			std::cout << "Try to connect the file server...  ";
-			wsfileServer.open(( "ws://127.0.0.1:" + temp ).c_str());
-			std::cout << "done!" << std::endl;
+
 		}
-		else
-		{
-			std::cout << "Command Error!" << std::endl;
-			exit(0);
-		}
+		else throw( "Out Of Memory!" );
 	}
 
 	// Start
