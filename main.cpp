@@ -113,14 +113,70 @@ int main(int argc, char** argv)
 	}
 	else
 	{
+		if ( argc > 4 )
+			throw( "Command Out Of Memory" );
+
 		std::cout << "Have Command! Will use command to connect servers!" << std::endl;
-		if ( argv[1] == "-cq" )
+		if ( argv [1] == "-cq" )
 		{
-			std::string portTemp = argv [2];
-			if ( portTemp.at(0) == '-' )
-				throw( "Command Error!" );
-			else
+			for ( int g = 2; g < 5; g + 2 )
 			{
+				std::string portTemp = argv [g];
+				if ( portTemp.at(0) == '-' )
+					throw( "Command Error!" );
+				else
+				{
+					if ( g == 4 )
+					{
+						std::string stemp = argv [3];
+						if ( stemp != "-fs" )
+							throw( "Command Error!" );
+					}
+
+					for ( int i = 0; i < portTemp.size(); i++ )
+						if ( !isdigit(portTemp.at(i)) )
+							throw( "Not Digit!" );
+
+					std::istringstream sti(portTemp);
+					unsigned int iport = 0;
+					sti >> iport;
+
+					if ( iport >= 1 && iport <= 65535 )
+					{
+						if ( g == 2 )
+						{
+							std::cout << "Connect On Bot...";
+							wsclient.open(( "ws://127.0.0.1:" + std::to_string(iport) ).c_str());
+							portTemp.clear();
+							iport = 0;
+							std::cout << "Done!" << std::endl;
+						}
+						else if ( g == 4 )
+						{
+							std::cout << "Connect On File Server...";
+							wsfileServer.open(( "ws://127.0.0.1:" + std::to_string(iport) ).c_str());
+							std::cout << "Done!" << std::endl;
+						}
+					}
+					else throw( "Out of Memory!" );
+				}
+			}
+		}
+		else if ( argv [1] == "-fs" )
+		{
+			for ( int g = 2; g < 5; g + 2 )
+			{
+				std::string portTemp = argv [g];
+				if ( portTemp.at(0) == '-' )
+					throw( "Command Error!" );
+				
+				if ( g == 4 )
+				{
+					std::string stemp = argv [3];
+					if ( stemp != "-cq" )
+						throw( "Command Error!" );
+				}
+
 				for ( int i = 0; i < portTemp.size(); i++ )
 					if ( !isdigit(portTemp.at(i)) )
 						throw( "Not Digit!" );
@@ -128,8 +184,28 @@ int main(int argc, char** argv)
 				std::istringstream sti(portTemp);
 				unsigned int iport = 0;
 				sti >> iport;
+
+				if ( iport >= 1 && iport <= 65535 )
+				{
+					if ( g == 2 )
+					{
+						std::cout << "Connect On File Server...";
+						wsfileServer.open(( "ws://127.0.0.1:" + std::to_string(iport) ).c_str());
+						portTemp.clear();
+						iport = 0;
+						std::cout << "Done!" << std::endl;
+					}
+					else if ( g == 4 )
+					{
+						std::cout << "Connect On Bot...";
+						wsclient.open(( "ws://127.0.0.1:" + std::to_string(iport) ).c_str());
+						std::cout << "Done!" << std::endl;
+					}
+				}
+				else throw( "Out of Memory!" );
 			}
 		}
+		else throw( "Command Error!" );
 	}
 
 	// Start
