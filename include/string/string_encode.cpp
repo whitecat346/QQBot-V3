@@ -19,6 +19,10 @@ std::string encrypt::decode(std::string rstr)
 	return std::string();
 }
 
+std::string encrypt::to_hex(const char in)
+{
+	
+}
 
 // Random Make
 std::string encrypt::random_make::FunctionA(const char in)

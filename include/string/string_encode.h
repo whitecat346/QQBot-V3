@@ -10,6 +10,8 @@ namespace encrypt
 	std::string encode(std::string rstr);
 	std::string decode(std::string rstr);
 
+	std::string to_hex(const char in);
+
 	namespace random_make
 	{
 		std::string FunctionA(const char in);
