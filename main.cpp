@@ -116,8 +116,19 @@ int main(int argc, char** argv)
 		std::cout << "Have Command! Will use command to connect servers!" << std::endl;
 		if ( argv[1] == "-cq" )
 		{
-			// TODO: add score code
-			// connect on servers
+			std::string portTemp = argv [2];
+			if ( portTemp.at(0) == '-' )
+				throw( "Command Error!" );
+			else
+			{
+				for ( int i = 0; i < portTemp.size(); i++ )
+					if ( !isdigit(portTemp.at(i)) )
+						throw( "Not Digit!" );
+
+				std::istringstream sti(portTemp);
+				unsigned int iport = 0;
+				sti >> iport;
+			}
 		}
 	}
 
