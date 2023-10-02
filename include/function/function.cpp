@@ -99,9 +99,14 @@ void qqBot::OnMessage(const std::string& msg)
 	else if ( omMsg.find("status") != omMsg.end() )
 	{
 		if ( omMsg.find("data") != omMsg.end() )
-		{
-			
-		}
+			std::cout << "Get Data: " << omMsg.at("data") << std::endl;
+		/*{
+			if ( omMsg.find("echo") != omMsg.end() && omMsg.at("echo") == "system_request" )
+			{
+
+			}
+			else std::cout << "Get Data: " << omMsg.at("data") << std::endl;
+		}*/
 		else
 		{
 			if ( omMsg.at("status") == "ok" && omMsg.at("retcode") == 0 )
