@@ -12,6 +12,7 @@ typedef void( *fun ) ( std::string& msg );
 
 hv::WebSocketClient wsclient;
 hv::WebSocketClient wsfileServer;
+
 std::map<std::string, int>  funIndex;
 std::map<std::string, bool> funED;
 std::map<std::string, int> fileIndex;

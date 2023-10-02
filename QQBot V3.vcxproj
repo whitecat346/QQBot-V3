@@ -136,6 +136,7 @@
     <ClCompile Include="include\function\cqmsg.cpp" />
     <ClCompile Include="include\function\function.cpp" />
     <ClCompile Include="include\string\function.cpp" />
+    <ClCompile Include="include\string\string_encode.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +212,7 @@
     <ClInclude Include="include\hv\WebSocketServer.h" />
     <ClInclude Include="include\hv\wsdef.h" />
     <ClInclude Include="include\string\function.h" />
+    <ClInclude Include="include\string\string_encode.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitgnore" />
