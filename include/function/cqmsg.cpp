@@ -1,7 +1,6 @@
 #include <string>
 #include "cqmsg.h"
 
-#include <ranges>
 /*
   {
     "action": "终结点名称, 例如 'send_group_msg'",
