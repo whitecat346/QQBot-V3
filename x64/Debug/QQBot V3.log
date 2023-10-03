@@ -1,0 +1,63 @@
+﻿D:\App\Microsoft Visual Studio\2022\Preview\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: 名为 function.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 include\function\function.cpp, include\string\function.cpp。
+  cqmsg.cpp
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(5,134): error C2548: “cqmsg::BotGroupMessageSend”: 缺少形参 2 的默认实参
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(6,170): error C2548: “cqmsg::BotPrivateMessageSend”: 缺少形参 3 的默认实参
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(14,64): error C2572: “cqmsg::BotGroupMessageSend”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(5,14): message : 参见“cqmsg::BotGroupMessageSend”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(14,106): error C2572: “cqmsg::BotGroupMessageSend”: 重定义默认参数 : 参数 3
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(5,14): message : 参见“cqmsg::BotGroupMessageSend”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(14,132): error C2572: “cqmsg::BotGroupMessageSend”: 重定义默认参数 : 参数 4
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(5,14): message : 参见“cqmsg::BotGroupMessageSend”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(15,1): error C2548: “cqmsg::BotGroupMessageSend”: 缺少形参 2 的默认实参
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(32,59): error C2572: “cqmsg::BotGroupDeleteMessage”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(7,14): message : 参见“cqmsg::BotGroupDeleteMessage”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(43,59): error C2572: “cqmsg::BotGroupSetEssenceMsg”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(10,14): message : 参见“cqmsg::BotGroupSetEssenceMsg”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(53,65): error C2572: “cqmsg::BotGroupSetGroupWholeBan”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(9,14): message : 参见“cqmsg::BotGroupSetGroupWholeBan”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(53,85): error C2572: “cqmsg::BotGroupSetGroupWholeBan”: 重定义默认参数 : 参数 2
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(9,14): message : 参见“cqmsg::BotGroupSetGroupWholeBan”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(64,62): error C2572: “cqmsg::BotGroupDeleteEssenceMsg”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(11,14): message : 参见“cqmsg::BotGroupDeleteEssenceMsg”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(75,64): error C2572: “cqmsg::BotGroupSetGroupBan”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(8,14): message : 参见“cqmsg::BotGroupSetGroupBan”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(75,93): error C2572: “cqmsg::BotGroupSetGroupBan”: 重定义默认参数 : 参数 2
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(8,14): message : 参见“cqmsg::BotGroupSetGroupBan”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(75,123): error C2572: “cqmsg::BotGroupSetGroupBan”: 重定义默认参数 : 参数 3
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(8,14): message : 参见“cqmsg::BotGroupSetGroupBan”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(94,65): error C2572: “cqmsg::BotPrivateMessageSend”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(6,14): message : 参见“cqmsg::BotPrivateMessageSend”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(94,95): error C2572: “cqmsg::BotPrivateMessageSend”: 重定义默认参数 : 参数 2
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(6,14): message : 参见“cqmsg::BotPrivateMessageSend”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(94,141): error C2572: “cqmsg::BotPrivateMessageSend”: 重定义默认参数 : 参数 4
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(6,14): message : 参见“cqmsg::BotPrivateMessageSend”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(94,167): error C2572: “cqmsg::BotPrivateMessageSend”: 重定义默认参数 : 参数 5
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(6,14): message : 参见“cqmsg::BotPrivateMessageSend”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(95,1): error C2548: “cqmsg::BotPrivateMessageSend”: 缺少形参 3 的默认实参
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(116,65): error C2572: “cqmsg::BotGroupSetGroupKick”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(12,14): message : 参见“cqmsg::BotGroupSetGroupKick”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(116,94): error C2572: “cqmsg::BotGroupSetGroupKick”: 重定义默认参数 : 参数 2
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(12,14): message : 参见“cqmsg::BotGroupSetGroupKick”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(116,126): error C2572: “cqmsg::BotGroupSetGroupKick”: 重定义默认参数 : 参数 3
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(12,14): message : 参见“cqmsg::BotGroupSetGroupKick”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(131,97): error C2572: “cqmsg::BotSetGroupAddRequest”: 重定义默认参数 : 参数 1
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(13,14): message : 参见“cqmsg::BotSetGroupAddRequest”的声明
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(131,123): error C2572: “cqmsg::BotSetGroupAddRequest”: 重定义默认参数 : 参数 2
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(13,14): message : 参见“cqmsg::BotSetGroupAddRequest”的声明
+  function.cpp
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(5,134): error C2548: “cqmsg::BotGroupMessageSend”: 缺少形参 2 的默认实参
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.h(6,170): error C2548: “cqmsg::BotPrivateMessageSend”: 缺少形参 3 的默认实参
+  function.cpp
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(17,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(25,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(33,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(105,15): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(122,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  string_encode.cpp
+  main.cpp
+  正在生成代码...
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\string_encode.cpp(15): error C4716: “encrypt::encode”: 必须返回一个值
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\string_encode.cpp(25): error C4716: “encrypt::to_hex”: 必须返回一个值
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(98): warning C4715: “str::BotFunction::CqCode_String”: 不是所有的控件路径都返回值

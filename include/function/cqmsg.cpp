@@ -11,7 +11,7 @@
     "echo": "'回声', 如果指定了 echo 字段, 那么响应包也会同时包含一个 echo 字段, 它们会有相同的值"
   }
  */
-std::string cqmsg::BotGroupMessageSend(unsigned int group_id = NULL, std::string msg, bool auto_escape = false, std::string echo = "!none!")
+std::string cqmsg::BotGroupMessageSend(unsigned int group_id, std::string msg, bool auto_escape, std::string echo)
 {
 	std::string temp = "{\"action\":\"send_group_msg\",\"params\":{\"group_id\":";
 	if ( group_id != NULL )
@@ -29,7 +29,7 @@ std::string cqmsg::BotGroupMessageSend(unsigned int group_id = NULL, std::string
 	return temp;
 }
 
-std::string cqmsg::BotGroupDeleteMessage(int message_id = NULL)
+std::string cqmsg::BotGroupDeleteMessage(int message_id)
 {
 	std::string temp = "{\"action\":\"delete_msg\",\"params\":{\"message_id\":";
 
@@ -40,7 +40,7 @@ std::string cqmsg::BotGroupDeleteMessage(int message_id = NULL)
 	return temp;
 }
 
-std::string cqmsg::BotGroupSetEssenceMsg(int message_id = NULL)
+std::string cqmsg::BotGroupSetEssenceMsg(int message_id)
 {
 	std::string temp = "{\"action\":\"set_essence_msg\",\"params\":{\"message_id\":";
 	if ( message_id != NULL )
@@ -50,7 +50,7 @@ std::string cqmsg::BotGroupSetEssenceMsg(int message_id = NULL)
 	return temp;
 }
 
-std::string cqmsg::BotGroupSetGroupWholeBan(unsigned group_id = NULL, bool enable = true)
+std::string cqmsg::BotGroupSetGroupWholeBan(unsigned group_id, bool enable)
 {
 	std::string temp = "{\"action\":\"set_group_whole_ban\",\"params\":{\"group_id\":";
 
@@ -61,7 +61,7 @@ std::string cqmsg::BotGroupSetGroupWholeBan(unsigned group_id = NULL, bool enabl
 	return temp;
 }
 
-std::string cqmsg::BotGroupDeleteEssenceMsg(int message_id = NULL)
+std::string cqmsg::BotGroupDeleteEssenceMsg(int message_id)
 {
 	std::string temp = "{\"action\":\"delete_essence_msg\",\"params\":{\"message_id\":";
 
@@ -72,7 +72,7 @@ std::string cqmsg::BotGroupDeleteEssenceMsg(int message_id = NULL)
 	return temp;
 }
 
-std::string cqmsg::BotGroupSetGroupBan(unsigned int group_id = NULL, unsigned int user_id = NULL, unsigned int duration = 0)
+std::string cqmsg::BotGroupSetGroupBan(unsigned int group_id, unsigned int user_id, unsigned int duration)
 {
 	std::string temp = "{\"action\":\"set_group_ban\",\"params\":{\"group_id\":";
 
@@ -91,7 +91,7 @@ std::string cqmsg::BotGroupSetGroupBan(unsigned int group_id = NULL, unsigned in
 	return temp;
 }
 
-std::string cqmsg::BotPrivateMessageSend(unsigned int user_id = NULL, unsigned int group_id = NULL, std::string message, bool auto_escape = false, std::string echo = "!none!")
+std::string cqmsg::BotPrivateMessageSend(unsigned int user_id, unsigned int group_id, std::string message, bool auto_escape, std::string echo)
 {
 	std::string temp = "{\"action\":\"send_private_msg\",\"params\":{\"group_id\":";
 
@@ -113,7 +113,7 @@ std::string cqmsg::BotPrivateMessageSend(unsigned int user_id = NULL, unsigned i
 }
 
 
-std::string cqmsg::BotGroupSetGroupKick(unsigned int group_id = NULL, unsigned int user_id = NULL, bool reject_add_request = false)
+std::string cqmsg::BotGroupSetGroupKick(unsigned int group_id, unsigned int user_id, bool reject_add_request)
 {
 	std::string temp = "{\"action\":\"set_group_kick\",\"params\":{\"group_id\":";
 
@@ -128,7 +128,7 @@ std::string cqmsg::BotGroupSetGroupKick(unsigned int group_id = NULL, unsigned i
 	return temp;
 }
 
-std::string cqmsg::BotSetGroupAddRequest(std::string flag, std::string sub_type, bool approve = true, std::string reson = "!none!")
+std::string cqmsg::BotSetGroupAddRequest(std::string flag, std::string sub_type, bool approve, std::string reson)
 {
 	std::string temp = "{\"action\":\"set_group_add_request\",\"params\":{\"flag\":\"" + flag + "\",\"sub_type\":\"" + sub_type + "\",\"approve\":" + std::to_string(approve);
 
