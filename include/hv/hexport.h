@@ -3,17 +3,17 @@
 
 // HV_EXPORT
 #if defined(HV_STATICLIB) || defined(HV_SOURCE)
-    #define HV_EXPORT
+#define HV_EXPORT
 #elif defined(_MSC_VER)
-    #if defined(HV_DYNAMICLIB) || defined(HV_EXPORTS) || defined(hv_EXPORTS)
-        #define HV_EXPORT  __declspec(dllexport)
-    #else
-        #define HV_EXPORT  __declspec(dllimport)
-    #endif
-#elif defined(__GNUC__)
-    #define HV_EXPORT  __attribute__((visibility("default")))
+#if defined(HV_DYNAMICLIB) || defined(HV_EXPORTS) || defined(hv_EXPORTS)
+#define HV_EXPORT  __declspec(dllexport)
 #else
-    #define HV_EXPORT
+#define HV_EXPORT  __declspec(dllimport)
+#endif
+#elif defined(__GNUC__)
+#define HV_EXPORT  __attribute__((visibility("default")))
+#else
+#define HV_EXPORT
 #endif
 
 // HV_INLINE
@@ -32,9 +32,9 @@
 
 // HV_UNUSED
 #if defined(__GNUC__)
-    #define HV_UNUSED   __attribute__((visibility("unused")))
+#define HV_UNUSED   __attribute__((visibility("unused")))
 #else
-    #define HV_UNUSED
+#define HV_UNUSED
 #endif
 
 // @param[IN | OUT | INOUT]

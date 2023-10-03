@@ -54,15 +54,15 @@ BEGIN_EXTERN_C
 
 #define honce_t                 INIT_ONCE
 #define HONCE_INIT              INIT_ONCE_STATIC_INIT
-typedef void (*honce_fn)();
+typedef void ( *honce_fn )( );
 static inline BOOL WINAPI s_once_func(INIT_ONCE* once, PVOID arg, PVOID* _) {
-    honce_fn fn = (honce_fn)arg;
-    fn();
-    return TRUE;
+	honce_fn fn = (honce_fn)arg;
+	fn();
+	return TRUE;
 }
 static inline void honce(honce_t* once, honce_fn fn) {
-    PVOID dummy = NULL;
-    InitOnceExecuteOnce(once, s_once_func, (PVOID)fn, &dummy);
+	PVOID dummy = NULL;
+	InitOnceExecuteOnce(once, s_once_func, (PVOID)fn, &dummy);
 }
 
 #define hsem_t                      HANDLE
@@ -121,32 +121,32 @@ static inline void honce(honce_t* once, honce_fn fn) {
 #define htimed_mutex_lock           pthread_mutex_lock
 #define htimed_mutex_unlock         pthread_mutex_unlock
 static inline void timespec_after(struct timespec* ts, unsigned int ms) {
-    struct timeval  tv;
-    gettimeofday(&tv, NULL);
-    ts->tv_sec = tv.tv_sec + ms / 1000;
-    ts->tv_nsec = tv.tv_usec * 1000 + ms % 1000 * 1000000;
-    if (ts->tv_nsec >= 1000000000) {
-        ts->tv_nsec -= 1000000000;
-        ts->tv_sec += 1;
-    }
+	struct timeval  tv;
+	gettimeofday(&tv, NULL);
+	ts->tv_sec = tv.tv_sec + ms / 1000;
+	ts->tv_nsec = tv.tv_usec * 1000 + ms % 1000 * 1000000;
+	if ( ts->tv_nsec >= 1000000000 ) {
+		ts->tv_nsec -= 1000000000;
+		ts->tv_sec += 1;
+	}
 }
 // true:  OK
 // false: ETIMEDOUT
 static inline int htimed_mutex_lock_for(htimed_mutex_t* mutex, unsigned int ms) {
 #if HAVE_PTHREAD_MUTEX_TIMEDLOCK
-    struct timespec ts;
-    timespec_after(&ts, ms);
-    return pthread_mutex_timedlock(mutex, &ts) != ETIMEDOUT;
+	struct timespec ts;
+	timespec_after(&ts, ms);
+	return pthread_mutex_timedlock(mutex, &ts) != ETIMEDOUT;
 #else
-    int ret = 0;
-    unsigned int end = gettick_ms() + ms;
-    while ((ret = pthread_mutex_trylock(mutex)) != 0) {
-        if (gettick_ms() >= end) {
-            break;
-        }
-        hv_msleep(1);
-    }
-    return ret == 0;
+	int ret = 0;
+	unsigned int end = gettick_ms() + ms;
+	while ( ( ret = pthread_mutex_trylock(mutex) ) != 0 ) {
+		if ( gettick_ms() >= end ) {
+			break;
+		}
+		hv_msleep(1);
+	}
+	return ret == 0;
 #endif
 }
 
@@ -159,9 +159,9 @@ static inline int htimed_mutex_lock_for(htimed_mutex_t* mutex, unsigned int ms) 
 // true:  OK
 // false: ETIMEDOUT
 static inline int hcondvar_wait_for(hcondvar_t* cond, hmutex_t* mutex, unsigned int ms) {
-    struct timespec ts;
-    timespec_after(&ts, ms);
-    return pthread_cond_timedwait(cond, mutex, &ts) != ETIMEDOUT;
+	struct timespec ts;
+	timespec_after(&ts, ms);
+	return pthread_cond_timedwait(cond, mutex, &ts) != ETIMEDOUT;
 }
 
 #define honce_t                 pthread_once_t
@@ -178,19 +178,19 @@ static inline int hcondvar_wait_for(hcondvar_t* cond, hmutex_t* mutex, unsigned 
 // false: ETIMEDOUT
 static inline int hsem_wait_for(hsem_t* sem, unsigned int ms) {
 #if HAVE_SEM_TIMEDWAIT
-    struct timespec ts;
-    timespec_after(&ts, ms);
-    return sem_timedwait(sem, &ts) != ETIMEDOUT;
+	struct timespec ts;
+	timespec_after(&ts, ms);
+	return sem_timedwait(sem, &ts) != ETIMEDOUT;
 #else
-    int ret = 0;
-    unsigned int end = gettick_ms() + ms;
-    while ((ret = sem_trywait(sem)) != 0) {
-        if (gettick_ms() >= end) {
-            break;
-        }
-        hv_msleep(1);
-    }
-    return ret == 0;
+	int ret = 0;
+	unsigned int end = gettick_ms() + ms;
+	while ( ( ret = sem_trywait(sem) ) != 0 ) {
+		if ( gettick_ms() >= end ) {
+			break;
+		}
+		hv_msleep(1);
+	}
+	return ret == 0;
 #endif
 }
 
@@ -212,50 +212,50 @@ BEGIN_NAMESPACE_HV
 
 class MutexLock {
 public:
-    MutexLock() { hmutex_init(&_mutex); }
-    ~MutexLock() { hmutex_destroy(&_mutex); }
+	MutexLock() { hmutex_init(&_mutex); }
+	~MutexLock() { hmutex_destroy(&_mutex); }
 
-    void lock() { hmutex_lock(&_mutex); }
-    void unlock() { hmutex_unlock(&_mutex); }
+	void lock() { hmutex_lock(&_mutex); }
+	void unlock() { hmutex_unlock(&_mutex); }
 protected:
-    hmutex_t _mutex;
+	hmutex_t _mutex;
 };
 
 class SpinLock {
 public:
-    SpinLock() { hspinlock_init(&_spin); }
-    ~SpinLock() { hspinlock_destroy(&_spin); }
+	SpinLock() { hspinlock_init(&_spin); }
+	~SpinLock() { hspinlock_destroy(&_spin); }
 
-    void lock() { hspinlock_lock(&_spin); }
-    void unlock() { hspinlock_unlock(&_spin); }
+	void lock() { hspinlock_lock(&_spin); }
+	void unlock() { hspinlock_unlock(&_spin); }
 protected:
-    hspinlock_t _spin;
+	hspinlock_t _spin;
 };
 
 class RWLock {
 public:
-    RWLock()    { hrwlock_init(&_rwlock); }
-    ~RWLock()   { hrwlock_destroy(&_rwlock); }
+	RWLock() { hrwlock_init(&_rwlock); }
+	~RWLock() { hrwlock_destroy(&_rwlock); }
 
-    void rdlock()   { hrwlock_rdlock(&_rwlock); }
-    void rdunlock() { hrwlock_rdunlock(&_rwlock); }
+	void rdlock() { hrwlock_rdlock(&_rwlock); }
+	void rdunlock() { hrwlock_rdunlock(&_rwlock); }
 
-    void wrlock()   { hrwlock_wrlock(&_rwlock); }
-    void wrunlock() { hrwlock_wrunlock(&_rwlock); }
+	void wrlock() { hrwlock_wrlock(&_rwlock); }
+	void wrunlock() { hrwlock_wrunlock(&_rwlock); }
 
-    void lock()     { rdlock(); }
-    void unlock()   { rdunlock(); }
+	void lock() { rdlock(); }
+	void unlock() { rdunlock(); }
 protected:
-    hrwlock_t   _rwlock;
+	hrwlock_t   _rwlock;
 };
 
 template<class T>
 class LockGuard {
 public:
-    LockGuard(T& t) : _lock(t) { _lock.lock(); }
-    ~LockGuard() { _lock.unlock(); }
+	LockGuard(T& t) : _lock(t) { _lock.lock(); }
+	~LockGuard() { _lock.unlock(); }
 protected:
-    T& _lock;
+	T& _lock;
 };
 
 END_NAMESPACE_HV

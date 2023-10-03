@@ -51,7 +51,7 @@ HV_EXPORT void  hv_free(void* ptr);
 HV_EXPORT long hv_alloc_cnt();
 HV_EXPORT long hv_free_cnt();
 HV_INLINE void hv_memcheck(void) {
-    printf("Memcheck => alloc:%ld free:%ld\n", hv_alloc_cnt(), hv_free_cnt());
+	printf("Memcheck => alloc:%ld free:%ld\n", hv_alloc_cnt(), hv_free_cnt());
 }
 #define HV_MEMCHECK    atexit(hv_memcheck);
 
@@ -106,7 +106,7 @@ HV_EXPORT char* get_run_dir(char* buf, int size);
 
 // random
 HV_EXPORT int   hv_rand(int min, int max);
-HV_EXPORT char* hv_random_string(char *buf, int len);
+HV_EXPORT char* hv_random_string(char* buf, int len);
 
 // 1 y on yes true enable => true
 HV_EXPORT bool   hv_getboolean(const char* str);
@@ -117,23 +117,23 @@ HV_EXPORT time_t hv_parse_time(const char* str);
 
 // scheme:[//[user[:password]@]host[:port]][/path][?query][#fragment]
 typedef enum {
-    HV_URL_SCHEME,
-    HV_URL_USERNAME,
-    HV_URL_PASSWORD,
-    HV_URL_HOST,
-    HV_URL_PORT,
-    HV_URL_PATH,
-    HV_URL_QUERY,
-    HV_URL_FRAGMENT,
-    HV_URL_FIELD_NUM,
+	HV_URL_SCHEME,
+	HV_URL_USERNAME,
+	HV_URL_PASSWORD,
+	HV_URL_HOST,
+	HV_URL_PORT,
+	HV_URL_PATH,
+	HV_URL_QUERY,
+	HV_URL_FRAGMENT,
+	HV_URL_FIELD_NUM,
 } hurl_field_e;
 
 typedef struct hurl_s {
-    struct {
-        unsigned short off;
-        unsigned short len;
-    } fields[HV_URL_FIELD_NUM];
-    unsigned short port;
+	struct {
+		unsigned short off;
+		unsigned short len;
+	} fields [HV_URL_FIELD_NUM];
+	unsigned short port;
 } hurl_t;
 
 HV_EXPORT int hv_parse_url(hurl_t* stURL, const char* strURL);

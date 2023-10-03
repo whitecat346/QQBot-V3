@@ -5,7 +5,7 @@
  * @copyright 2018 HeWei, all rights reserved.
  */
 
-// platform
+ // platform
 #include "hconfig.h"
 #include "hexport.h"
 #include "hplatform.h"

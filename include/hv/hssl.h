@@ -20,25 +20,25 @@ typedef void* hssl_ctx_t;   ///> SSL_CTX
 typedef void* hssl_t;       ///> SSL
 
 enum {
-    HSSL_SERVER = 0,
-    HSSL_CLIENT = 1,
+	HSSL_SERVER = 0,
+	HSSL_CLIENT = 1,
 };
 
 enum {
-    HSSL_OK = 0,
-    HSSL_ERROR = -1,
-    HSSL_WANT_READ = -2,
-    HSSL_WANT_WRITE = -3,
-    HSSL_WOULD_BLOCK = -4,
+	HSSL_OK = 0,
+	HSSL_ERROR = -1,
+	HSSL_WANT_READ = -2,
+	HSSL_WANT_WRITE = -3,
+	HSSL_WOULD_BLOCK = -4,
 };
 
 typedef struct {
-    const char* crt_file;
-    const char* key_file;
-    const char* ca_file;
-    const char* ca_path;
-    short       verify_peer;
-    short       endpoint; // HSSL_SERVER / HSSL_CLIENT
+	const char* crt_file;
+	const char* key_file;
+	const char* ca_file;
+	const char* ca_path;
+	short       verify_peer;
+	short       endpoint; // HSSL_SERVER / HSSL_CLIENT
 } hssl_ctx_opt_t, hssl_ctx_init_param_t;
 
 BEGIN_EXTERN_C
@@ -46,13 +46,13 @@ BEGIN_EXTERN_C
 /*
 const char* hssl_backend() {
 #ifdef WITH_OPENSSL
-    return "openssl";
+	return "openssl";
 #elif defined(WITH_GNUTLS)
-    return "gnutls";
+	return "gnutls";
 #elif defined(WITH_MBEDTLS)
-    return "mbedtls";
+	return "mbedtls";
 #else
-    return "nossl";
+	return "nossl";
 #endif
 }
 */

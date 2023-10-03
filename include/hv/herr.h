@@ -104,7 +104,7 @@
 #undef ERR_OK // prevent conflict
 enum {
 #define F(errcode, name, errmsg) ERR_##name = errcode,
-    FOREACH_ERR(F)
+	FOREACH_ERR(F)
 #undef  F
 };
 
@@ -112,8 +112,8 @@ enum {
 extern "C" {
 #endif
 
-// errcode => errmsg
-HV_EXPORT const char* hv_strerror(int err);
+	// errcode => errmsg
+	HV_EXPORT const char* hv_strerror(int err);
 
 #ifdef __cplusplus
 } // extern "C"

@@ -13,43 +13,43 @@
 BEGIN_EXTERN_C
 
 typedef struct main_ctx_s {
-    char    run_dir[MAX_PATH];
-    char    program_name[MAX_PATH];
+	char    run_dir [MAX_PATH];
+	char    program_name [MAX_PATH];
 
-    char    confile[MAX_PATH]; // default etc/${program}.conf
-    char    pidfile[MAX_PATH]; // default logs/${program}.pid
-    char    logfile[MAX_PATH]; // default logs/${program}.log
+	char    confile [MAX_PATH]; // default etc/${program}.conf
+	char    pidfile [MAX_PATH]; // default logs/${program}.pid
+	char    logfile [MAX_PATH]; // default logs/${program}.log
 
-    pid_t   pid;    // getpid
-    pid_t   oldpid; // getpid_from_pidfile
+	pid_t   pid;    // getpid
+	pid_t   oldpid; // getpid_from_pidfile
 
-    // arg
-    int     argc;
-    int     arg_len;
-    char**  os_argv;
-    char**  save_argv;
-    char*   cmdline;
-    // parsed arg
-    int     arg_kv_size;
-    char**  arg_kv;
-    int     arg_list_size;
-    char**  arg_list;
+	// arg
+	int     argc;
+	int     arg_len;
+	char** os_argv;
+	char** save_argv;
+	char* cmdline;
+	// parsed arg
+	int     arg_kv_size;
+	char** arg_kv;
+	int     arg_list_size;
+	char** arg_list;
 
-    // env
-    int     envc;
-    int     env_len;
-    char**  os_envp;
-    char**  save_envp;
+	// env
+	int     envc;
+	int     env_len;
+	char** os_envp;
+	char** save_envp;
 
-    // signals
-    procedure_t     reload_fn;
-    void*           reload_userdata;
-    // master workers model
-    int             worker_processes;
-    int             worker_threads;
-    procedure_t     worker_fn;
-    void*           worker_userdata;
-    proc_ctx_t*     proc_ctxs;
+	// signals
+	procedure_t     reload_fn;
+	void* reload_userdata;
+	// master workers model
+	int             worker_processes;
+	int             worker_threads;
+	procedure_t     worker_fn;
+	void* worker_userdata;
+	proc_ctx_t* proc_ctxs;
 } main_ctx_t;
 
 // arg_type
@@ -62,9 +62,9 @@ typedef struct main_ctx_s {
 #define OPTION_ENABLE   "1"
 #define OPTION_DISABLE  "0"
 typedef struct option_s {
-    char        short_opt;
-    const char* long_opt;
-    int         arg_type;
+	char        short_opt;
+	const char* long_opt;
+	int         arg_type;
 } option_t;
 
 HV_EXPORT int  main_ctx_init(int argc, char** argv);
@@ -106,11 +106,11 @@ HV_EXPORT extern main_ctx_t   g_main_ctx;
 
 // master-workers processes
 HV_EXPORT int master_workers_run(
-        procedure_t worker_fn,
-        void* worker_userdata DEFAULT(NULL),
-        int worker_processes DEFAULT(DEFAULT_WORKER_PROCESSES),
-        int worker_threads DEFAULT(0),
-        bool wait DEFAULT(true));
+		procedure_t worker_fn,
+		void* worker_userdata DEFAULT(NULL),
+		int worker_processes DEFAULT(DEFAULT_WORKER_PROCESSES),
+		int worker_threads DEFAULT(0),
+		bool wait DEFAULT(true));
 
 END_EXTERN_C
 

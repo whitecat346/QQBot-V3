@@ -13,34 +13,32 @@
 #define websocket_server_stop   http_server_stop
 
 namespace hv {
+	struct WebSocketService {
+		std::function<void(const WebSocketChannelPtr&, const HttpRequestPtr&)>  onopen;
+		std::function<void(const WebSocketChannelPtr&, const std::string&)>     onmessage;
+		std::function<void(const WebSocketChannelPtr&)>                         onclose;
+		int ping_interval;
 
-struct WebSocketService {
-    std::function<void(const WebSocketChannelPtr&, const HttpRequestPtr&)>  onopen;
-    std::function<void(const WebSocketChannelPtr&, const std::string&)>     onmessage;
-    std::function<void(const WebSocketChannelPtr&)>                         onclose;
-    int ping_interval;
+		WebSocketService() : ping_interval(0) {}
 
-    WebSocketService() : ping_interval(0) {}
+		void setPingInterval(int ms) {
+			ping_interval = ms;
+		}
+	};
 
-    void setPingInterval(int ms) {
-        ping_interval = ms;
-    }
-};
+	class WebSocketServer : public HttpServer {
+	public:
+		WebSocketServer(WebSocketService* service = NULL)
+			: HttpServer()
+		{
+			this->ws = service;
+		}
+		~WebSocketServer() { stop(); }
 
-class WebSocketServer : public HttpServer {
-public:
-    WebSocketServer(WebSocketService* service = NULL)
-        : HttpServer()
-    {
-        this->ws = service;
-    }
-    ~WebSocketServer() { stop(); }
-
-    void registerWebSocketService(WebSocketService* service) {
-        this->ws = service;
-    }
-};
-
+		void registerWebSocketService(WebSocketService* service) {
+			this->ws = service;
+		}
+	};
 }
 
 #endif // HV_WEBSOCKET_SERVER_H_

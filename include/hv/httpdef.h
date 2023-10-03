@@ -10,18 +10,18 @@ enum http_version { HTTP_V1 = 1, HTTP_V2 = 2 };
 enum http_session_type { HTTP_CLIENT, HTTP_SERVER };
 enum http_parser_type { HTTP_REQUEST, HTTP_RESPONSE, HTTP_BOTH };
 enum http_parser_state {
-    HP_START_REQ_OR_RES,
-    HP_MESSAGE_BEGIN,
-    HP_URL,
-    HP_STATUS,
-    HP_HEADER_FIELD,
-    HP_HEADER_VALUE,
-    HP_HEADERS_COMPLETE,
-    HP_CHUNK_HEADER,
-    HP_BODY,
-    HP_CHUNK_COMPLETE,
-    HP_MESSAGE_COMPLETE,
-    HP_ERROR
+	HP_START_REQ_OR_RES,
+	HP_MESSAGE_BEGIN,
+	HP_URL,
+	HP_STATUS,
+	HP_HEADER_FIELD,
+	HP_HEADER_VALUE,
+	HP_HEADERS_COMPLETE,
+	HP_CHUNK_HEADER,
+	HP_BODY,
+	HP_CHUNK_COMPLETE,
+	HP_MESSAGE_COMPLETE,
+	HP_ERROR
 };
 
 // http_status
@@ -90,9 +90,9 @@ enum http_parser_state {
 // HTTP_STATUS_##name
 enum http_status {
 #define XX(num, name, string) HTTP_STATUS_##name = num,
-    HTTP_STATUS_MAP(XX)
+	HTTP_STATUS_MAP(XX)
 #undef XX
-    HTTP_CUSTOM_STATUS
+	HTTP_CUSTOM_STATUS
 };
 
 #define HTTP_STATUS_IS_REDIRECT(status)             \
@@ -153,9 +153,9 @@ enum http_status {
 // HTTP_##name
 enum http_method {
 #define XX(num, name, string) HTTP_##name = num,
-    HTTP_METHOD_MAP(XX)
+	HTTP_METHOD_MAP(XX)
 #undef XX
-    HTTP_CUSTOM_METHOD
+	HTTP_CUSTOM_METHOD
 };
 
 // MIME: https://www.iana.org/assignments/media-types/media-types.xhtml
@@ -249,30 +249,30 @@ enum http_method {
 
 enum http_content_type {
 #define XX(name, string, suffix)   name,
-    CONTENT_TYPE_NONE           = 0,
+	CONTENT_TYPE_NONE = 0,
 
-    CONTENT_TYPE_TEXT           = 100,
-    MIME_TYPE_TEXT_MAP(XX)
+	CONTENT_TYPE_TEXT = 100,
+	MIME_TYPE_TEXT_MAP(XX)
 
-    CONTENT_TYPE_APPLICATION    = 200,
-    MIME_TYPE_APPLICATION_MAP(XX)
+	CONTENT_TYPE_APPLICATION = 200,
+	MIME_TYPE_APPLICATION_MAP(XX)
 
-    CONTENT_TYPE_MULTIPART      = 300,
-    MIME_TYPE_MULTIPART_MAP(XX)
+	CONTENT_TYPE_MULTIPART = 300,
+	MIME_TYPE_MULTIPART_MAP(XX)
 
-    CONTENT_TYPE_IMAGE          = 400,
-    MIME_TYPE_IMAGE_MAP(XX)
+	CONTENT_TYPE_IMAGE = 400,
+	MIME_TYPE_IMAGE_MAP(XX)
 
-    CONTENT_TYPE_VIDEO          = 500,
-    MIME_TYPE_VIDEO_MAP(XX)
+	CONTENT_TYPE_VIDEO = 500,
+	MIME_TYPE_VIDEO_MAP(XX)
 
-    CONTENT_TYPE_AUDIO          = 600,
-    MIME_TYPE_AUDIO_MAP(XX)
+	CONTENT_TYPE_AUDIO = 600,
+	MIME_TYPE_AUDIO_MAP(XX)
 
-    CONTENT_TYPE_FONT           = 700,
-    MIME_TYPE_FONT_MAP(XX)
+	CONTENT_TYPE_FONT = 700,
+	MIME_TYPE_FONT_MAP(XX)
 
-    CONTENT_TYPE_UNDEFINED      = 1000
+	CONTENT_TYPE_UNDEFINED = 1000
 #undef XX
 };
 

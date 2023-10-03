@@ -9,45 +9,43 @@
 #include "hmath.h"
 
 namespace hv {
+	class HV_EXPORT WebSocketChannel : public SocketChannel {
+	public:
+		ws_session_type type;
+		WebSocketChannel(hio_t* io, ws_session_type type = WS_CLIENT)
+			: SocketChannel(io)
+			, type(type)
+			, opcode(WS_OPCODE_CLOSE)
+		{}
+		~WebSocketChannel() {}
 
-class HV_EXPORT WebSocketChannel : public SocketChannel {
-public:
-    ws_session_type type;
-    WebSocketChannel(hio_t* io, ws_session_type type = WS_CLIENT)
-        : SocketChannel(io)
-        , type(type)
-        , opcode(WS_OPCODE_CLOSE)
-    {}
-    ~WebSocketChannel() {}
+		// isConnected, send, close
 
-    // isConnected, send, close
+		int send(const std::string& msg, enum ws_opcode opcode = WS_OPCODE_TEXT, bool fin = true) {
+			return send(msg.c_str(), msg.size(), opcode, fin);
+		}
 
-    int send(const std::string& msg, enum ws_opcode opcode = WS_OPCODE_TEXT, bool fin = true) {
-        return send(msg.c_str(), msg.size(), opcode, fin);
-    }
+		int send(const char* buf, int len, enum ws_opcode opcode = WS_OPCODE_BINARY, bool fin = true);
 
-    int send(const char* buf, int len, enum ws_opcode opcode = WS_OPCODE_BINARY, bool fin = true);
+		// websocket fragment
+		int send(const char* buf, int len, int fragment, enum ws_opcode opcode = WS_OPCODE_BINARY);
 
-    // websocket fragment
-    int send(const char* buf, int len, int fragment, enum ws_opcode opcode = WS_OPCODE_BINARY);
+		int sendPing();
+		int sendPong();
 
-    int sendPing();
-    int sendPong();
+		int close() {
+			return SocketChannel::close(type == WS_SERVER);
+		}
 
-    int close() {
-        return SocketChannel::close(type == WS_SERVER);
-    }
+	protected:
+		int sendFrame(const char* buf, int len, enum ws_opcode opcode = WS_OPCODE_BINARY, bool fin = true);
 
-protected:
-    int sendFrame(const char* buf, int len, enum ws_opcode opcode = WS_OPCODE_BINARY, bool fin = true);
-
-public:
-    enum ws_opcode  opcode;
-private:
-    Buffer      sendbuf_;
-    std::mutex  mutex_;
-};
-
+	public:
+		enum ws_opcode  opcode;
+	private:
+		Buffer      sendbuf_;
+		std::mutex  mutex_;
+	};
 }
 
 typedef std::shared_ptr<hv::WebSocketChannel> WebSocketChannelPtr;

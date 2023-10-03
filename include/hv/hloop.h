@@ -17,31 +17,31 @@ typedef struct htimeout_s   htimeout_t;
 typedef struct hperiod_s    hperiod_t;
 typedef struct hio_s        hio_t;
 
-typedef void (*hevent_cb)   (hevent_t* ev);
-typedef void (*hidle_cb)    (hidle_t* idle);
-typedef void (*htimer_cb)   (htimer_t* timer);
-typedef void (*hio_cb)      (hio_t* io);
+typedef void ( *hevent_cb )   ( hevent_t* ev );
+typedef void ( *hidle_cb )    ( hidle_t* idle );
+typedef void ( *htimer_cb )   ( htimer_t* timer );
+typedef void ( *hio_cb )      ( hio_t* io );
 
-typedef void (*haccept_cb)  (hio_t* io);
-typedef void (*hconnect_cb) (hio_t* io);
-typedef void (*hread_cb)    (hio_t* io, void* buf, int readbytes);
-typedef void (*hwrite_cb)   (hio_t* io, const void* buf, int writebytes);
-typedef void (*hclose_cb)   (hio_t* io);
+typedef void ( *haccept_cb )  ( hio_t* io );
+typedef void ( *hconnect_cb ) ( hio_t* io );
+typedef void ( *hread_cb )    ( hio_t* io, void* buf, int readbytes );
+typedef void ( *hwrite_cb )   ( hio_t* io, const void* buf, int writebytes );
+typedef void ( *hclose_cb )   ( hio_t* io );
 
 typedef enum {
-    HLOOP_STATUS_STOP,
-    HLOOP_STATUS_RUNNING,
-    HLOOP_STATUS_PAUSE
+	HLOOP_STATUS_STOP,
+	HLOOP_STATUS_RUNNING,
+	HLOOP_STATUS_PAUSE
 } hloop_status_e;
 
 typedef enum {
-    HEVENT_TYPE_NONE    = 0,
-    HEVENT_TYPE_IO      = 0x00000001,
-    HEVENT_TYPE_TIMEOUT = 0x00000010,
-    HEVENT_TYPE_PERIOD  = 0x00000020,
-    HEVENT_TYPE_TIMER   = HEVENT_TYPE_TIMEOUT|HEVENT_TYPE_PERIOD,
-    HEVENT_TYPE_IDLE    = 0x00000100,
-    HEVENT_TYPE_CUSTOM  = 0x00000400, // 1024
+	HEVENT_TYPE_NONE = 0,
+	HEVENT_TYPE_IO = 0x00000001,
+	HEVENT_TYPE_TIMEOUT = 0x00000010,
+	HEVENT_TYPE_PERIOD = 0x00000020,
+	HEVENT_TYPE_TIMER = HEVENT_TYPE_TIMEOUT | HEVENT_TYPE_PERIOD,
+	HEVENT_TYPE_IDLE = 0x00000100,
+	HEVENT_TYPE_CUSTOM = 0x00000400, // 1024
 } hevent_type_e;
 
 #define HEVENT_LOWEST_PRIORITY    (-5)
@@ -70,7 +70,7 @@ typedef enum {
 
 // sizeof(struct hevent_s)=64 on x64
 struct hevent_s {
-    HEVENT_FIELDS
+	HEVENT_FIELDS
 };
 
 #define hevent_set_id(ev, id)           ((hevent_t*)(ev))->event_id = id
@@ -86,33 +86,33 @@ struct hevent_s {
 #define hevent_userdata(ev)     (((hevent_t*)(ev))->userdata)
 
 typedef enum {
-    HIO_TYPE_UNKNOWN    = 0,
-    HIO_TYPE_STDIN      = 0x00000001,
-    HIO_TYPE_STDOUT     = 0x00000002,
-    HIO_TYPE_STDERR     = 0x00000004,
-    HIO_TYPE_STDIO      = 0x0000000F,
+	HIO_TYPE_UNKNOWN = 0,
+	HIO_TYPE_STDIN = 0x00000001,
+	HIO_TYPE_STDOUT = 0x00000002,
+	HIO_TYPE_STDERR = 0x00000004,
+	HIO_TYPE_STDIO = 0x0000000F,
 
-    HIO_TYPE_FILE       = 0x00000010,
+	HIO_TYPE_FILE = 0x00000010,
 
-    HIO_TYPE_IP         = 0x00000100,
-    HIO_TYPE_SOCK_RAW   = 0x00000F00,
+	HIO_TYPE_IP = 0x00000100,
+	HIO_TYPE_SOCK_RAW = 0x00000F00,
 
-    HIO_TYPE_UDP        = 0x00001000,
-    HIO_TYPE_KCP        = 0x00002000,
-    HIO_TYPE_DTLS       = 0x00010000,
-    HIO_TYPE_SOCK_DGRAM = 0x000FF000,
+	HIO_TYPE_UDP = 0x00001000,
+	HIO_TYPE_KCP = 0x00002000,
+	HIO_TYPE_DTLS = 0x00010000,
+	HIO_TYPE_SOCK_DGRAM = 0x000FF000,
 
-    HIO_TYPE_TCP        = 0x00100000,
-    HIO_TYPE_SSL        = 0x01000000,
-    HIO_TYPE_TLS        = HIO_TYPE_SSL,
-    HIO_TYPE_SOCK_STREAM= 0x0FF00000,
+	HIO_TYPE_TCP = 0x00100000,
+	HIO_TYPE_SSL = 0x01000000,
+	HIO_TYPE_TLS = HIO_TYPE_SSL,
+	HIO_TYPE_SOCK_STREAM = 0x0FF00000,
 
-    HIO_TYPE_SOCKET     = 0x0FFFFF00,
+	HIO_TYPE_SOCKET = 0x0FFFFF00,
 } hio_type_e;
 
 typedef enum {
-    HIO_SERVER_SIDE  = 0,
-    HIO_CLIENT_SIDE  = 1,
+	HIO_SERVER_SIDE = 0,
+	HIO_CLIENT_SIDE = 1,
 } hio_side_e;
 
 #define HIO_DEFAULT_CONNECT_TIMEOUT     10000   // ms
@@ -179,7 +179,7 @@ HV_EXPORT void* hloop_userdata(hloop_t* loop);
  * ev.userdata = userdata;
  * hloop_post_event(loop, &ev);
  */
-// NOTE: hloop_post_event is thread-safe, used to post event from other thread to loop thread.
+ // NOTE: hloop_post_event is thread-safe, used to post event from other thread to loop thread.
 HV_EXPORT void hloop_post_event(hloop_t* loop, hevent_t* ev);
 
 // idle
@@ -199,8 +199,8 @@ HV_EXPORT htimer_t* htimer_add(hloop_t* loop, htimer_cb cb, uint32_t timeout_ms,
  *  30      1        1      -1      10          cron.yearly
  */
 HV_EXPORT htimer_t* htimer_add_period(hloop_t* loop, htimer_cb cb,
-                        int8_t minute DEFAULT(0),  int8_t hour  DEFAULT(-1), int8_t day DEFAULT(-1),
-                        int8_t week   DEFAULT(-1), int8_t month DEFAULT(-1), uint32_t repeat DEFAULT(INFINITE));
+						int8_t minute DEFAULT(0), int8_t hour  DEFAULT(-1), int8_t day DEFAULT(-1),
+						int8_t week   DEFAULT(-1), int8_t month DEFAULT(-1), uint32_t repeat DEFAULT(INFINITE));
 
 HV_EXPORT void htimer_del(htimer_t* timer);
 HV_EXPORT void htimer_reset(htimer_t* timer, uint32_t timeout_ms DEFAULT(0));
@@ -213,19 +213,19 @@ HV_EXPORT void htimer_reset(htimer_t* timer, uint32_t timeout_ms DEFAULT(0));
 /*
 const char* hio_engine() {
 #ifdef EVENT_SELECT
-    return  "select";
+	return  "select";
 #elif defined(EVENT_POLL)
-    return  "poll";
+	return  "poll";
 #elif defined(EVENT_EPOLL)
-    return  "epoll";
+	return  "epoll";
 #elif defined(EVENT_KQUEUE)
-    return  "kqueue";
+	return  "kqueue";
 #elif defined(EVENT_IOCP)
-    return  "iocp";
+	return  "iocp";
 #elif defined(EVENT_PORT)
-    return  "evport";
+	return  "evport";
 #else
-    return  "noevent";
+	return  "noevent";
 #endif
 }
 */
@@ -238,21 +238,21 @@ HV_EXPORT int    hio_del(hio_t* io, int events DEFAULT(HV_RDWR));
 // NOTE: io detach from old loop and attach to new loop
 /* @see examples/multi-thread/one-acceptor-multi-workers.c
 void new_conn_event(hevent_t* ev) {
-    hloop_t* loop = ev->loop;
-    hio_t* io = (hio_t*)hevent_userdata(ev);
-    hio_attach(loop, io);
+	hloop_t* loop = ev->loop;
+	hio_t* io = (hio_t*)hevent_userdata(ev);
+	hio_attach(loop, io);
 }
 
 void on_accpet(hio_t* io) {
-    hio_detach(io);
+	hio_detach(io);
 
-    hloop_t* worker_loop = get_one_loop();
-    hevent_t ev;
-    memset(&ev, 0, sizeof(ev));
-    ev.loop = worker_loop;
-    ev.cb = new_conn_event;
-    ev.userdata = io;
-    hloop_post_event(worker_loop, &ev);
+	hloop_t* worker_loop = get_one_loop();
+	hevent_t ev;
+	memset(&ev, 0, sizeof(ev));
+	ev.loop = worker_loop;
+	ev.cb = new_conn_event;
+	ev.userdata = io;
+	hloop_post_event(worker_loop, &ev);
 }
  */
 HV_EXPORT void hio_detach(/*hloop_t* loop,*/ hio_t* io);
@@ -261,14 +261,14 @@ HV_EXPORT bool hio_exists(hloop_t* loop, int fd);
 
 // hio_t fields
 // NOTE: fd cannot be used as unique identifier, so we provide an id.
-HV_EXPORT uint32_t hio_id (hio_t* io);
-HV_EXPORT int hio_fd      (hio_t* io);
-HV_EXPORT int hio_error   (hio_t* io);
-HV_EXPORT int hio_events  (hio_t* io);
-HV_EXPORT int hio_revents (hio_t* io);
-HV_EXPORT hio_type_e       hio_type     (hio_t* io);
+HV_EXPORT uint32_t hio_id(hio_t* io);
+HV_EXPORT int hio_fd(hio_t* io);
+HV_EXPORT int hio_error(hio_t* io);
+HV_EXPORT int hio_events(hio_t* io);
+HV_EXPORT int hio_revents(hio_t* io);
+HV_EXPORT hio_type_e       hio_type(hio_t* io);
 HV_EXPORT struct sockaddr* hio_localaddr(hio_t* io);
-HV_EXPORT struct sockaddr* hio_peeraddr (hio_t* io);
+HV_EXPORT struct sockaddr* hio_peeraddr(hio_t* io);
 HV_EXPORT void hio_set_context(hio_t* io, void* ctx);
 HV_EXPORT void* hio_context(hio_t* io);
 HV_EXPORT bool hio_is_opened(hio_t* io);
@@ -282,7 +282,7 @@ typedef struct fifo_buf_s hio_readbuf_t;
 // But you can pass in your own readbuf instead of the default readbuf to avoid memcopy.
 HV_EXPORT void hio_set_readbuf(hio_t* io, void* buf, size_t len);
 HV_EXPORT hio_readbuf_t* hio_get_readbuf(hio_t* io);
-HV_EXPORT void hio_set_max_read_bufsize (hio_t* io, uint32_t size);
+HV_EXPORT void hio_set_max_read_bufsize(hio_t* io, uint32_t size);
 HV_EXPORT void hio_set_max_write_bufsize(hio_t* io, uint32_t size);
 // NOTE: hio_write is non-blocking, so there is a write queue inside hio_t to cache unwritten data and wait for writable.
 // @return current buffer size of write queue.
@@ -293,11 +293,11 @@ HV_EXPORT uint64_t hio_last_read_time(hio_t* io);   // ms
 HV_EXPORT uint64_t hio_last_write_time(hio_t* io);  // ms
 
 // set callbacks
-HV_EXPORT void hio_setcb_accept   (hio_t* io, haccept_cb  accept_cb);
-HV_EXPORT void hio_setcb_connect  (hio_t* io, hconnect_cb connect_cb);
-HV_EXPORT void hio_setcb_read     (hio_t* io, hread_cb    read_cb);
-HV_EXPORT void hio_setcb_write    (hio_t* io, hwrite_cb   write_cb);
-HV_EXPORT void hio_setcb_close    (hio_t* io, hclose_cb   close_cb);
+HV_EXPORT void hio_setcb_accept(hio_t* io, haccept_cb  accept_cb);
+HV_EXPORT void hio_setcb_connect(hio_t* io, hconnect_cb connect_cb);
+HV_EXPORT void hio_setcb_read(hio_t* io, hread_cb    read_cb);
+HV_EXPORT void hio_setcb_write(hio_t* io, hwrite_cb   write_cb);
+HV_EXPORT void hio_setcb_close(hio_t* io, hclose_cb   close_cb);
 // get callbacks
 HV_EXPORT haccept_cb  hio_getcb_accept(hio_t* io);
 HV_EXPORT hconnect_cb hio_getcb_connect(hio_t* io);
@@ -308,7 +308,7 @@ HV_EXPORT hclose_cb   hio_getcb_close(hio_t* io);
 // Enable SSL/TLS is so easy :)
 HV_EXPORT int  hio_enable_ssl(hio_t* io);
 HV_EXPORT bool hio_is_ssl(hio_t* io);
-HV_EXPORT int  hio_set_ssl    (hio_t* io, hssl_t ssl);
+HV_EXPORT int  hio_set_ssl(hio_t* io, hssl_t ssl);
 HV_EXPORT int  hio_set_ssl_ctx(hio_t* io, hssl_ctx_t ssl_ctx);
 // hssl_ctx_new(opt) -> hio_set_ssl_ctx
 HV_EXPORT int  hio_new_ssl_ctx(hio_t* io, hssl_ctx_opt_t* opt);
@@ -330,33 +330,33 @@ HV_EXPORT void hio_set_write_timeout(hio_t* io, int timeout_ms);
 HV_EXPORT void hio_set_keepalive_timeout(hio_t* io, int timeout_ms DEFAULT(HIO_DEFAULT_KEEPALIVE_TIMEOUT));
 /*
 void send_heartbeat(hio_t* io) {
-    static char buf[] = "PING\r\n";
-    hio_write(io, buf, 6);
+	static char buf[] = "PING\r\n";
+	hio_write(io, buf, 6);
 }
 hio_set_heartbeat(io, 3000, send_heartbeat);
 */
-typedef void (*hio_send_heartbeat_fn)(hio_t* io);
+typedef void ( *hio_send_heartbeat_fn )( hio_t* io );
 // heartbeat interval => hio_send_heartbeat_fn
 HV_EXPORT void hio_set_heartbeat(hio_t* io, int interval_ms, hio_send_heartbeat_fn fn);
 
 // Nonblocking, poll IO events in the loop to call corresponding callback.
 // hio_add(io, HV_READ) => accept => haccept_cb
-HV_EXPORT int hio_accept (hio_t* io);
+HV_EXPORT int hio_accept(hio_t* io);
 
 // connect => hio_add(io, HV_WRITE) => hconnect_cb
 HV_EXPORT int hio_connect(hio_t* io);
 
 // hio_add(io, HV_READ) => read => hread_cb
-HV_EXPORT int hio_read   (hio_t* io);
+HV_EXPORT int hio_read(hio_t* io);
 #define hio_read_start(io) hio_read(io)
 #define hio_read_stop(io)  hio_del(io, HV_READ)
 
 // hio_read_start => hread_cb => hio_read_stop
-HV_EXPORT int hio_read_once (hio_t* io);
+HV_EXPORT int hio_read_once(hio_t* io);
 // hio_read_once => hread_cb(len)
 HV_EXPORT int hio_read_until_length(hio_t* io, unsigned int len);
 // hio_read_once => hread_cb(...delim)
-HV_EXPORT int hio_read_until_delim (hio_t* io, unsigned char delim);
+HV_EXPORT int hio_read_until_delim(hio_t* io, unsigned char delim);
 HV_EXPORT int hio_read_remain(hio_t* io);
 // @see examples/tinyhttpd.c examples/tinyproxyd.c
 #define hio_readline(io)        hio_read_until_delim(io, '\n')
@@ -366,41 +366,41 @@ HV_EXPORT int hio_read_remain(hio_t* io);
 
 // NOTE: hio_write is thread-safe, locked by recursive_mutex, allow to be called by other threads.
 // hio_try_write => hio_add(io, HV_WRITE) => write => hwrite_cb
-HV_EXPORT int hio_write  (hio_t* io, const void* buf, size_t len);
+HV_EXPORT int hio_write(hio_t* io, const void* buf, size_t len);
 
 // NOTE: hio_close is thread-safe, hio_close_async will be called actually in other thread.
 // hio_del(io, HV_RDWR) => close => hclose_cb
-HV_EXPORT int hio_close  (hio_t* io);
+HV_EXPORT int hio_close(hio_t* io);
 // NOTE: hloop_post_event(hio_close_event)
 HV_EXPORT int hio_close_async(hio_t* io);
 
 //------------------high-level apis-------------------------------------------
 // hio_get -> hio_set_readbuf -> hio_setcb_read -> hio_read
-HV_EXPORT hio_t* hread    (hloop_t* loop, int fd, void* buf, size_t len, hread_cb read_cb);
+HV_EXPORT hio_t* hread(hloop_t* loop, int fd, void* buf, size_t len, hread_cb read_cb);
 // hio_get -> hio_setcb_write -> hio_write
-HV_EXPORT hio_t* hwrite   (hloop_t* loop, int fd, const void* buf, size_t len, hwrite_cb write_cb DEFAULT(NULL));
+HV_EXPORT hio_t* hwrite(hloop_t* loop, int fd, const void* buf, size_t len, hwrite_cb write_cb DEFAULT(NULL));
 // hio_get -> hio_close
-HV_EXPORT void   hclose   (hloop_t* loop, int fd);
+HV_EXPORT void   hclose(hloop_t* loop, int fd);
 
 // tcp
 // hio_get -> hio_setcb_accept -> hio_accept
-HV_EXPORT hio_t* haccept  (hloop_t* loop, int listenfd, haccept_cb accept_cb);
+HV_EXPORT hio_t* haccept(hloop_t* loop, int listenfd, haccept_cb accept_cb);
 // hio_get -> hio_setcb_connect -> hio_connect
-HV_EXPORT hio_t* hconnect (hloop_t* loop, int connfd,   hconnect_cb connect_cb);
+HV_EXPORT hio_t* hconnect(hloop_t* loop, int connfd, hconnect_cb connect_cb);
 // hio_get -> hio_set_readbuf -> hio_setcb_read -> hio_read
-HV_EXPORT hio_t* hrecv    (hloop_t* loop, int connfd, void* buf, size_t len, hread_cb read_cb);
+HV_EXPORT hio_t* hrecv(hloop_t* loop, int connfd, void* buf, size_t len, hread_cb read_cb);
 // hio_get -> hio_setcb_write -> hio_write
-HV_EXPORT hio_t* hsend    (hloop_t* loop, int connfd, const void* buf, size_t len, hwrite_cb write_cb DEFAULT(NULL));
+HV_EXPORT hio_t* hsend(hloop_t* loop, int connfd, const void* buf, size_t len, hwrite_cb write_cb DEFAULT(NULL));
 
 // udp
 HV_EXPORT void hio_set_type(hio_t* io, hio_type_e type);
 HV_EXPORT void hio_set_localaddr(hio_t* io, struct sockaddr* addr, int addrlen);
-HV_EXPORT void hio_set_peeraddr (hio_t* io, struct sockaddr* addr, int addrlen);
+HV_EXPORT void hio_set_peeraddr(hio_t* io, struct sockaddr* addr, int addrlen);
 // NOTE: must call hio_set_peeraddr before hrecvfrom/hsendto
 // hio_get -> hio_set_readbuf -> hio_setcb_read -> hio_read
-HV_EXPORT hio_t* hrecvfrom (hloop_t* loop, int sockfd, void* buf, size_t len, hread_cb read_cb);
+HV_EXPORT hio_t* hrecvfrom(hloop_t* loop, int sockfd, void* buf, size_t len, hread_cb read_cb);
 // hio_get -> hio_setcb_write -> hio_write
-HV_EXPORT hio_t* hsendto   (hloop_t* loop, int sockfd, const void* buf, size_t len, hwrite_cb write_cb DEFAULT(NULL));
+HV_EXPORT hio_t* hsendto(hloop_t* loop, int sockfd, const void* buf, size_t len, hwrite_cb write_cb DEFAULT(NULL));
 
 //-----------------top-level apis---------------------------------------------
 // @hio_create_socket: socket -> bind -> listen
@@ -408,32 +408,32 @@ HV_EXPORT hio_t* hsendto   (hloop_t* loop, int sockfd, const void* buf, size_t l
 // side == HIO_SERVER_SIDE ? bind ->
 // type & HIO_TYPE_SOCK_STREAM ? listen ->
 HV_EXPORT hio_t* hio_create_socket(hloop_t* loop, const char* host, int port,
-                            hio_type_e type DEFAULT(HIO_TYPE_TCP),
-                            hio_side_e side DEFAULT(HIO_SERVER_SIDE));
+							hio_type_e type DEFAULT(HIO_TYPE_TCP),
+							hio_side_e side DEFAULT(HIO_SERVER_SIDE));
 
 // @tcp_server: hio_create_socket(loop, host, port, HIO_TYPE_TCP, HIO_SERVER_SIDE) -> hio_setcb_accept -> hio_accept
 // @see examples/tcp_echo_server.c
-HV_EXPORT hio_t* hloop_create_tcp_server (hloop_t* loop, const char* host, int port, haccept_cb accept_cb);
+HV_EXPORT hio_t* hloop_create_tcp_server(hloop_t* loop, const char* host, int port, haccept_cb accept_cb);
 
 // @tcp_client: hio_create_socket(loop, host, port, HIO_TYPE_TCP, HIO_CLIENT_SIDE) -> hio_setcb_connect -> hio_setcb_close -> hio_connect
 // @see examples/nc.c
-HV_EXPORT hio_t* hloop_create_tcp_client (hloop_t* loop, const char* host, int port, hconnect_cb connect_cb, hclose_cb close_cb);
+HV_EXPORT hio_t* hloop_create_tcp_client(hloop_t* loop, const char* host, int port, hconnect_cb connect_cb, hclose_cb close_cb);
 
 // @ssl_server: hio_create_socket(loop, host, port, HIO_TYPE_SSL, HIO_SERVER_SIDE) -> hio_setcb_accept -> hio_accept
 // @see examples/tcp_echo_server.c => #define TEST_SSL 1
-HV_EXPORT hio_t* hloop_create_ssl_server (hloop_t* loop, const char* host, int port, haccept_cb accept_cb);
+HV_EXPORT hio_t* hloop_create_ssl_server(hloop_t* loop, const char* host, int port, haccept_cb accept_cb);
 
 // @ssl_client: hio_create_socket(loop, host, port, HIO_TYPE_SSL, HIO_CLIENT_SIDE) -> hio_setcb_connect -> hio_setcb_close -> hio_connect
 // @see examples/nc.c => #define TEST_SSL 1
-HV_EXPORT hio_t* hloop_create_ssl_client (hloop_t* loop, const char* host, int port, hconnect_cb connect_cb, hclose_cb close_cb);
+HV_EXPORT hio_t* hloop_create_ssl_client(hloop_t* loop, const char* host, int port, hconnect_cb connect_cb, hclose_cb close_cb);
 
 // @udp_server: hio_create_socket(loop, host, port, HIO_TYPE_UDP, HIO_SERVER_SIDE)
 // @see examples/udp_echo_server.c
-HV_EXPORT hio_t* hloop_create_udp_server (hloop_t* loop, const char* host, int port);
+HV_EXPORT hio_t* hloop_create_udp_server(hloop_t* loop, const char* host, int port);
 
 // @udp_server: hio_create_socket(loop, host, port, HIO_TYPE_UDP, HIO_CLIENT_SIDE)
 // @see examples/nc.c
-HV_EXPORT hio_t* hloop_create_udp_client (hloop_t* loop, const char* host, int port);
+HV_EXPORT hio_t* hloop_create_udp_client(hloop_t* loop, const char* host, int port);
 
 //-----------------upstream---------------------------------------------
 // hio_read(io)
@@ -467,10 +467,10 @@ HV_EXPORT hio_t* hio_setup_udp_upstream(hio_t* io, const char* host, int port);
 
 //-----------------unpack---------------------------------------------
 typedef enum {
-    UNPACK_MODE_NONE        = 0,
-    UNPACK_BY_FIXED_LENGTH  = 1,    // Not recommended
-    UNPACK_BY_DELIMITER     = 2,    // Suitable for text protocol
-    UNPACK_BY_LENGTH_FIELD  = 3,    // Suitable for binary protocol
+	UNPACK_MODE_NONE = 0,
+	UNPACK_BY_FIXED_LENGTH = 1,    // Not recommended
+	UNPACK_BY_DELIMITER = 2,    // Suitable for text protocol
+	UNPACK_BY_LENGTH_FIELD = 3,    // Suitable for binary protocol
 } unpack_mode_e;
 
 #define DEFAULT_PACKAGE_MAX_LENGTH  (1 << 21)   // 2M
@@ -480,58 +480,58 @@ typedef enum {
 
 // UNPACK_BY_LENGTH_FIELD
 typedef enum {
-    ENCODE_BY_VARINT        = 17,               // 1 MSB + 7 bits
-    ENCODE_BY_LITTEL_ENDIAN = LITTLE_ENDIAN,    // 1234
-    ENCODE_BY_BIG_ENDIAN    = BIG_ENDIAN,       // 4321
+	ENCODE_BY_VARINT = 17,               // 1 MSB + 7 bits
+	ENCODE_BY_LITTEL_ENDIAN = LITTLE_ENDIAN,    // 1234
+	ENCODE_BY_BIG_ENDIAN = BIG_ENDIAN,       // 4321
 } unpack_coding_e;
 
 typedef struct unpack_setting_s {
-    unpack_mode_e   mode;
-    unsigned int    package_max_length;
-    union {
-        // UNPACK_BY_FIXED_LENGTH
-        struct {
-            unsigned int    fixed_length;
-        };
-        // UNPACK_BY_DELIMITER
-        struct {
-            unsigned char   delimiter[PACKAGE_MAX_DELIMITER_BYTES];
-            unsigned short  delimiter_bytes;
-        };
-        /*
-         * UNPACK_BY_LENGTH_FIELD
-         *
-         * package_len = head_len + body_len + length_adjustment
-         *
-         * if (length_field_coding == ENCODE_BY_VARINT) head_len = body_offset + varint_bytes - length_field_bytes;
-         * else head_len = body_offset;
-         *
-         * length_field stores body length, exclude head length,
-         * if length_field = head_len + body_len, then length_adjustment should be set to -head_len.
-         *
-         */
-        struct {
-            unsigned short  body_offset; // Equal to head length usually
-            unsigned short  length_field_offset;
-            unsigned short  length_field_bytes;
-                     short  length_adjustment;
-            unpack_coding_e length_field_coding;
-        };
-    };
+	unpack_mode_e   mode;
+	unsigned int    package_max_length;
+	union {
+		// UNPACK_BY_FIXED_LENGTH
+		struct {
+			unsigned int    fixed_length;
+		};
+		// UNPACK_BY_DELIMITER
+		struct {
+			unsigned char   delimiter [PACKAGE_MAX_DELIMITER_BYTES];
+			unsigned short  delimiter_bytes;
+		};
+		/*
+		 * UNPACK_BY_LENGTH_FIELD
+		 *
+		 * package_len = head_len + body_len + length_adjustment
+		 *
+		 * if (length_field_coding == ENCODE_BY_VARINT) head_len = body_offset + varint_bytes - length_field_bytes;
+		 * else head_len = body_offset;
+		 *
+		 * length_field stores body length, exclude head length,
+		 * if length_field = head_len + body_len, then length_adjustment should be set to -head_len.
+		 *
+		 */
+		struct {
+			unsigned short  body_offset; // Equal to head length usually
+			unsigned short  length_field_offset;
+			unsigned short  length_field_bytes;
+			short  length_adjustment;
+			unpack_coding_e length_field_coding;
+		};
+	};
 #ifdef __cplusplus
-    unpack_setting_s() {
-        // Recommended setting:
-        // head = flags:1byte + length:4bytes = 5bytes
-        mode = UNPACK_BY_LENGTH_FIELD;
-        package_max_length = DEFAULT_PACKAGE_MAX_LENGTH;
-        fixed_length = 0;
-        delimiter_bytes = 0;
-        body_offset = 5;
-        length_field_offset = 1;
-        length_field_bytes = 4;
-        length_field_coding = ENCODE_BY_BIG_ENDIAN;
-        length_adjustment = 0;
-    }
+	unpack_setting_s() {
+		// Recommended setting:
+		// head = flags:1byte + length:4bytes = 5bytes
+		mode = UNPACK_BY_LENGTH_FIELD;
+		package_max_length = DEFAULT_PACKAGE_MAX_LENGTH;
+		fixed_length = 0;
+		delimiter_bytes = 0;
+		body_offset = 5;
+		length_field_offset = 1;
+		length_field_bytes = 4;
+		length_field_coding = ENCODE_BY_BIG_ENDIAN;
+		length_adjustment = 0;
+	}
 #endif
 } unpack_setting_t;
 
@@ -556,21 +556,21 @@ ftp_unpack_setting.delimiter[1] = '\n';
 ftp_unpack_setting.delimiter_bytes = 2;
 
 unpack_setting_t mqtt_unpack_setting = {
-    .mode = UNPACK_BY_LENGTH_FIELD,
-    .package_max_length = DEFAULT_PACKAGE_MAX_LENGTH,
-    .body_offset = 2,
-    .length_field_offset = 1,
-    .length_field_bytes = 1,
-    .length_field_coding = ENCODE_BY_VARINT,
+	.mode = UNPACK_BY_LENGTH_FIELD,
+	.package_max_length = DEFAULT_PACKAGE_MAX_LENGTH,
+	.body_offset = 2,
+	.length_field_offset = 1,
+	.length_field_bytes = 1,
+	.length_field_coding = ENCODE_BY_VARINT,
 };
 
 unpack_setting_t grpc_unpack_setting = {
-    .mode = UNPACK_BY_LENGTH_FIELD,
-    .package_max_length = DEFAULT_PACKAGE_MAX_LENGTH,
-    .body_offset = 5,
-    .length_field_offset = 1,
-    .length_field_bytes = 4,
-    .length_field_coding = ENCODE_BY_BIG_ENDIAN,
+	.mode = UNPACK_BY_LENGTH_FIELD,
+	.package_max_length = DEFAULT_PACKAGE_MAX_LENGTH,
+	.body_offset = 5,
+	.length_field_offset = 1,
+	.length_field_bytes = 4,
+	.length_field_coding = ENCODE_BY_BIG_ENDIAN,
 };
 */
 
@@ -580,79 +580,81 @@ unpack_setting_t grpc_unpack_setting = {
 #define DEFAULT_RECONNECT_DELAY_POLICY  2       // exponential
 #define DEFAULT_RECONNECT_MAX_RETRY_CNT INFINITE
 typedef struct reconn_setting_s {
-    uint32_t min_delay;  // ms
-    uint32_t max_delay;  // ms
-    uint32_t cur_delay;  // ms
-    /*
-     * @delay_policy
-     * 0: fixed
-     * min_delay=3s => 3,3,3...
-     * 1: linear
-     * min_delay=3s max_delay=10s => 3,6,9,10,10...
-     * other: exponential
-     * min_delay=3s max_delay=60s delay_policy=2 => 3,6,12,24,48,60,60...
-     */
-    uint32_t delay_policy;
-    uint32_t max_retry_cnt;
-    uint32_t cur_retry_cnt;
+	uint32_t min_delay;  // ms
+	uint32_t max_delay;  // ms
+	uint32_t cur_delay;  // ms
+	/*
+	 * @delay_policy
+	 * 0: fixed
+	 * min_delay=3s => 3,3,3...
+	 * 1: linear
+	 * min_delay=3s max_delay=10s => 3,6,9,10,10...
+	 * other: exponential
+	 * min_delay=3s max_delay=60s delay_policy=2 => 3,6,12,24,48,60,60...
+	 */
+	uint32_t delay_policy;
+	uint32_t max_retry_cnt;
+	uint32_t cur_retry_cnt;
 
 #ifdef __cplusplus
-    reconn_setting_s() {
-        min_delay = DEFAULT_RECONNECT_MIN_DELAY;
-        max_delay = DEFAULT_RECONNECT_MAX_DELAY;
-        cur_delay = 0;
-        // 1,2,4,8,16,32,60,60...
-        delay_policy = DEFAULT_RECONNECT_DELAY_POLICY;
-        max_retry_cnt = DEFAULT_RECONNECT_MAX_RETRY_CNT;
-        cur_retry_cnt = 0;
-    }
+	reconn_setting_s() {
+		min_delay = DEFAULT_RECONNECT_MIN_DELAY;
+		max_delay = DEFAULT_RECONNECT_MAX_DELAY;
+		cur_delay = 0;
+		// 1,2,4,8,16,32,60,60...
+		delay_policy = DEFAULT_RECONNECT_DELAY_POLICY;
+		max_retry_cnt = DEFAULT_RECONNECT_MAX_RETRY_CNT;
+		cur_retry_cnt = 0;
+	}
 #endif
 } reconn_setting_t;
 
 HV_INLINE void reconn_setting_init(reconn_setting_t* reconn) {
-    reconn->min_delay = DEFAULT_RECONNECT_MIN_DELAY;
-    reconn->max_delay = DEFAULT_RECONNECT_MAX_DELAY;
-    reconn->cur_delay = 0;
-    // 1,2,4,8,16,32,60,60...
-    reconn->delay_policy = DEFAULT_RECONNECT_DELAY_POLICY;
-    reconn->max_retry_cnt = DEFAULT_RECONNECT_MAX_RETRY_CNT;
-    reconn->cur_retry_cnt = 0;
+	reconn->min_delay = DEFAULT_RECONNECT_MIN_DELAY;
+	reconn->max_delay = DEFAULT_RECONNECT_MAX_DELAY;
+	reconn->cur_delay = 0;
+	// 1,2,4,8,16,32,60,60...
+	reconn->delay_policy = DEFAULT_RECONNECT_DELAY_POLICY;
+	reconn->max_retry_cnt = DEFAULT_RECONNECT_MAX_RETRY_CNT;
+	reconn->cur_retry_cnt = 0;
 }
 
 HV_INLINE void reconn_setting_reset(reconn_setting_t* reconn) {
-    reconn->cur_delay = 0;
-    reconn->cur_retry_cnt = 0;
+	reconn->cur_delay = 0;
+	reconn->cur_retry_cnt = 0;
 }
 
 HV_INLINE bool reconn_setting_can_retry(reconn_setting_t* reconn) {
-    ++reconn->cur_retry_cnt;
-    return reconn->max_retry_cnt == INFINITE ||
-           reconn->cur_retry_cnt < reconn->max_retry_cnt;
+	++reconn->cur_retry_cnt;
+	return reconn->max_retry_cnt == INFINITE ||
+		reconn->cur_retry_cnt < reconn->max_retry_cnt;
 }
 
 HV_INLINE uint32_t reconn_setting_calc_delay(reconn_setting_t* reconn) {
-    if (reconn->delay_policy == 0) {
-        // fixed
-        reconn->cur_delay = reconn->min_delay;
-    } else if (reconn->delay_policy == 1) {
-        // linear
-        reconn->cur_delay += reconn->min_delay;
-    } else {
-        // exponential
-        reconn->cur_delay *= reconn->delay_policy;
-    }
-    reconn->cur_delay = MAX(reconn->cur_delay, reconn->min_delay);
-    reconn->cur_delay = MIN(reconn->cur_delay, reconn->max_delay);
-    return reconn->cur_delay;
+	if ( reconn->delay_policy == 0 ) {
+		// fixed
+		reconn->cur_delay = reconn->min_delay;
+	}
+	else if ( reconn->delay_policy == 1 ) {
+		// linear
+		reconn->cur_delay += reconn->min_delay;
+	}
+	else {
+		// exponential
+		reconn->cur_delay *= reconn->delay_policy;
+	}
+	reconn->cur_delay = MAX(reconn->cur_delay, reconn->min_delay);
+	reconn->cur_delay = MIN(reconn->cur_delay, reconn->max_delay);
+	return reconn->cur_delay;
 }
 
 //-----------------LoadBalance-------------------------------------
 typedef enum {
-    LB_RoundRobin,
-    LB_Random,
-    LB_LeastConnections,
-    LB_IpHash,
-    LB_UrlHash,
+	LB_RoundRobin,
+	LB_Random,
+	LB_LeastConnections,
+	LB_IpHash,
+	LB_UrlHash,
 } load_balance_e;
 
 //-----------------rudp---------------------------------------------
@@ -667,73 +669,73 @@ HV_EXPORT int hio_close_rudp(hio_t* io, struct sockaddr* peeraddr DEFAULT(NULL))
 
 #if WITH_KCP
 typedef struct kcp_setting_s {
-    // ikcp_create(conv, ...)
-    unsigned int conv;
-    // ikcp_nodelay(kcp, nodelay, interval, fastresend, nocwnd)
-    int nodelay;
-    int interval;
-    int fastresend;
-    int nocwnd;
-    // ikcp_wndsize(kcp, sndwnd, rcvwnd)
-    int sndwnd;
-    int rcvwnd;
-    // ikcp_setmtu(kcp, mtu)
-    int mtu;
-    // ikcp_update
-    int update_interval;
+	// ikcp_create(conv, ...)
+	unsigned int conv;
+	// ikcp_nodelay(kcp, nodelay, interval, fastresend, nocwnd)
+	int nodelay;
+	int interval;
+	int fastresend;
+	int nocwnd;
+	// ikcp_wndsize(kcp, sndwnd, rcvwnd)
+	int sndwnd;
+	int rcvwnd;
+	// ikcp_setmtu(kcp, mtu)
+	int mtu;
+	// ikcp_update
+	int update_interval;
 
 #ifdef __cplusplus
-    kcp_setting_s() {
-        conv = 0x11223344;
-        // normal mode
-        nodelay = 0;
-        interval = 40;
-        fastresend = 0;
-        nocwnd = 0;
-        // fast mode
-        // nodelay = 1;
-        // interval = 10;
-        // fastresend = 2;
-        // nocwnd = 1;
+	kcp_setting_s() {
+		conv = 0x11223344;
+		// normal mode
+		nodelay = 0;
+		interval = 40;
+		fastresend = 0;
+		nocwnd = 0;
+		// fast mode
+		// nodelay = 1;
+		// interval = 10;
+		// fastresend = 2;
+		// nocwnd = 1;
 
-        sndwnd = 0;
-        rcvwnd = 0;
-        mtu = 1400;
-        update_interval = 10; // ms
-    }
+		sndwnd = 0;
+		rcvwnd = 0;
+		mtu = 1400;
+		update_interval = 10; // ms
+	}
 #endif
 } kcp_setting_t;
 
 HV_INLINE void kcp_setting_init_with_normal_mode(kcp_setting_t* setting) {
-    memset(setting, 0, sizeof(kcp_setting_t));
-    setting->nodelay = 0;
-    setting->interval = 40;
-    setting->fastresend = 0;
-    setting->nocwnd = 0;
+	memset(setting, 0, sizeof(kcp_setting_t));
+	setting->nodelay = 0;
+	setting->interval = 40;
+	setting->fastresend = 0;
+	setting->nocwnd = 0;
 }
 
 HV_INLINE void kcp_setting_init_with_fast_mode(kcp_setting_t* setting) {
-    memset(setting, 0, sizeof(kcp_setting_t));
-    setting->nodelay = 0;
-    setting->interval = 30;
-    setting->fastresend = 2;
-    setting->nocwnd = 1;
+	memset(setting, 0, sizeof(kcp_setting_t));
+	setting->nodelay = 0;
+	setting->interval = 30;
+	setting->fastresend = 2;
+	setting->nocwnd = 1;
 }
 
 HV_INLINE void kcp_setting_init_with_fast2_mode(kcp_setting_t* setting) {
-    memset(setting, 0, sizeof(kcp_setting_t));
-    setting->nodelay = 1;
-    setting->interval = 20;
-    setting->fastresend = 2;
-    setting->nocwnd = 1;
+	memset(setting, 0, sizeof(kcp_setting_t));
+	setting->nodelay = 1;
+	setting->interval = 20;
+	setting->fastresend = 2;
+	setting->nocwnd = 1;
 }
 
 HV_INLINE void kcp_setting_init_with_fast3_mode(kcp_setting_t* setting) {
-    memset(setting, 0, sizeof(kcp_setting_t));
-    setting->nodelay = 1;
-    setting->interval = 10;
-    setting->fastresend = 2;
-    setting->nocwnd = 1;
+	memset(setting, 0, sizeof(kcp_setting_t));
+	setting->nodelay = 1;
+	setting->interval = 10;
+	setting->fastresend = 2;
+	setting->nocwnd = 1;
 }
 
 // @see examples/udp_echo_server.c => #define TEST_KCP 1

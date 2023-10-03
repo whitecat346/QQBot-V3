@@ -33,29 +33,29 @@ content
 ***********************************************************************/
 // FormData
 struct FormData {
-    std::string     filename;
-    std::string     content;
+	std::string     filename;
+	std::string     content;
 
-    FormData(const char* content = NULL, const char* filename = NULL) {
-        if (content) {
-            this->content = content;
-        }
-        if (filename) {
-            this->filename = filename;
-        }
-    }
-    template<typename T>
-    FormData(T num) {
-        content = hv::to_string(num);
-    }
+	FormData(const char* content = NULL, const char* filename = NULL) {
+		if ( content ) {
+			this->content = content;
+		}
+		if ( filename ) {
+			this->filename = filename;
+		}
+	}
+	template<typename T>
+	FormData(T num) {
+		content = hv::to_string(num);
+	}
 };
 // FormFile
 struct FormFile : public FormData {
-    FormFile(const char* filename = NULL) {
-        if (filename) {
-            this->filename = filename;
-        }
-    }
+	FormFile(const char* filename = NULL) {
+		if ( filename ) {
+			this->filename = filename;
+		}
+	}
 };
 
 // MultiPart

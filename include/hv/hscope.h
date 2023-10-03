@@ -9,71 +9,71 @@ typedef std::function<void()> Function;
 // same as golang defer
 class Defer {
 public:
-    Defer(Function&& fn) : _fn(std::move(fn)) {}
-    ~Defer() { if(_fn) _fn();}
+	Defer(Function&& fn) : _fn(std::move(fn)) {}
+	~Defer() { if ( _fn ) _fn(); }
 private:
-    Function _fn;
+	Function _fn;
 };
 #define defer(code) Defer STRINGCAT(_defer_, __LINE__)([&](){code});
 
 class ScopeCleanup {
 public:
-    template<typename Fn, typename... Args>
-    ScopeCleanup(Fn&& fn, Args&&... args) {
-        _cleanup = std::bind(std::forward<Fn>(fn), std::forward<Args>(args)...);
-    }
+	template<typename Fn, typename... Args>
+	ScopeCleanup(Fn&& fn, Args&&... args) {
+		_cleanup = std::bind(std::forward<Fn>(fn), std::forward<Args>(args)...);
+	}
 
-    ~ScopeCleanup() {
-        _cleanup();
-    }
+	~ScopeCleanup() {
+		_cleanup();
+	}
 
 private:
-    Function _cleanup;
+	Function _cleanup;
 };
 
 template<typename T>
 class ScopeFree {
 public:
-    ScopeFree(T* p) : _p(p) {}
-    ~ScopeFree()    {SAFE_FREE(_p);}
+	ScopeFree(T* p) : _p(p) {}
+	~ScopeFree() { SAFE_FREE(_p); }
 private:
-    T*  _p;
+	T* _p;
 };
 
 template<typename T>
 class ScopeDelete {
 public:
-    ScopeDelete(T* p) : _p(p) {}
-    ~ScopeDelete()    {SAFE_DELETE(_p);}
+	ScopeDelete(T* p) : _p(p) {}
+	~ScopeDelete() { SAFE_DELETE(_p); }
 private:
-    T*  _p;
+	T* _p;
 };
 
 template<typename T>
 class ScopeDeleteArray {
 public:
-    ScopeDeleteArray(T* p) : _p(p) {}
-    ~ScopeDeleteArray()    {SAFE_DELETE_ARRAY(_p);}
+	ScopeDeleteArray(T* p) : _p(p) {}
+	~ScopeDeleteArray() { SAFE_DELETE_ARRAY(_p); }
 private:
-    T*  _p;
+	T* _p;
 };
 
 template<typename T>
 class ScopeRelease {
 public:
-    ScopeRelease(T* p) : _p(p) {}
-    ~ScopeRelease()    {SAFE_RELEASE(_p);}
+	ScopeRelease(T* p) : _p(p) {}
+	~ScopeRelease() { SAFE_RELEASE(_p); }
 private:
-    T*  _p;
+	T* _p;
 };
 
 template<typename T>
 class ScopeLock {
 public:
-    ScopeLock(T& mutex) : _mutex(mutex) {_mutex.lock();}
-    ~ScopeLock()    {_mutex.unlock();}
+	ScopeLock(T& mutex) : _mutex(mutex) { _mutex.lock(); }
+	~ScopeLock() { _mutex.unlock(); }
 private:
-    T& _mutex;
+	T& _mutex;
 };
 
 #endif // HV_SCOPE_H_

@@ -21,13 +21,10 @@
     <ClCompile Include="include\function\function.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="include\string\function.cpp">
+    <ClCompile Include="include\string\str.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="include\function\cqmsg.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="include\string\string_encode.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +32,7 @@
     <ClInclude Include="include\function\function.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="include\string\function.h">
+    <ClInclude Include="include\string\str.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\hv\AsyncHttpClient.h">
@@ -246,9 +243,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="include\function\cqmsg.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\string\string_encode.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

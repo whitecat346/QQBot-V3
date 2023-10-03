@@ -112,49 +112,49 @@
 #define PUSH_N(p, v, n) memcpy(p, v, n); p += n
 
 static inline int detect_endian() {
-    union {
-        char c;
-        short s;
-    } u;
-    u.s = 0x1122;
-    return u.c ==0x11 ? BIG_ENDIAN : LITTLE_ENDIAN;
+	union {
+		char c;
+		short s;
+	} u;
+	u.s = 0x1122;
+	return u.c == 0x11 ? BIG_ENDIAN : LITTLE_ENDIAN;
 }
 
 #ifdef __cplusplus
 template <typename T>
 uint8_t* serialize(uint8_t* buf, T value, int host_endian = LITTLE_ENDIAN, int buf_endian = BIG_ENDIAN) {
-    size_t size = sizeof(T);
-    uint8_t* pDst = buf;
-    uint8_t* pSrc = (uint8_t*)&value;
+	size_t size = sizeof(T);
+	uint8_t* pDst = buf;
+	uint8_t* pSrc = (uint8_t*)&value;
 
-    if (host_endian == buf_endian) {
-        memcpy(pDst, pSrc, size);
-    }
-    else {
-        for (int i = 0; i < size; ++i) {
-            pDst[i] = pSrc[size-i-1];
-        }
-    }
+	if ( host_endian == buf_endian ) {
+		memcpy(pDst, pSrc, size);
+	}
+	else {
+		for ( int i = 0; i < size; ++i ) {
+			pDst [i] = pSrc [size - i - 1];
+		}
+	}
 
-    return buf+size;
+	return buf + size;
 }
 
 template <typename T>
 uint8_t* deserialize(uint8_t* buf, T* value, int host_endian = LITTLE_ENDIAN, int buf_endian = BIG_ENDIAN) {
-    size_t size = sizeof(T);
-    uint8_t* pSrc = buf;
-    uint8_t* pDst = (uint8_t*)value;
+	size_t size = sizeof(T);
+	uint8_t* pSrc = buf;
+	uint8_t* pDst = (uint8_t*)value;
 
-    if (host_endian == buf_endian) {
-        memcpy(pDst, pSrc, size);
-    }
-    else {
-        for (int i = 0; i < size; ++i) {
-            pDst[i] = pSrc[size-i-1];
-        }
-    }
+	if ( host_endian == buf_endian ) {
+		memcpy(pDst, pSrc, size);
+	}
+	else {
+		for ( int i = 0; i < size; ++i ) {
+			pDst [i] = pSrc [size - i - 1];
+		}
+	}
 
-    return buf+size;
+	return buf + size;
 }
 #endif // __cplusplus
 

@@ -14,55 +14,55 @@ BEGIN_EXTERN_C
 #define IS_LEAP_YEAR(year) (((year)%4 == 0 && (year)%100 != 0) || (year)%400 == 0)
 
 typedef struct datetime_s {
-    int year;
-    int month;
-    int day;
-    int hour;
-    int min;
-    int sec;
-    int ms;
+	int year;
+	int month;
+	int day;
+	int hour;
+	int min;
+	int sec;
+	int ms;
 } datetime_t;
 
 #ifdef _MSC_VER
 /* @see winsock2.h
 // Structure used in select() call, taken from the BSD file sys/time.h
 struct timeval {
-    long    tv_sec;
-    long    tv_usec;
+	long    tv_sec;
+	long    tv_usec;
 };
 */
 
 struct timezone {
-    int tz_minuteswest; /* of Greenwich */
-    int tz_dsttime;     /* type of dst correction to apply */
+	int tz_minuteswest; /* of Greenwich */
+	int tz_dsttime;     /* type of dst correction to apply */
 };
 
 #include <sys/timeb.h>
-HV_INLINE int gettimeofday(struct timeval *tv, struct timezone *tz) {
-    struct _timeb tb;
-    _ftime(&tb);
-    if (tv) {
-        tv->tv_sec =  (long)tb.time;
-        tv->tv_usec = tb.millitm * 1000;
-    }
-    if (tz) {
-        tz->tz_minuteswest = tb.timezone;
-        tz->tz_dsttime = tb.dstflag;
-    }
-    return 0;
+HV_INLINE int gettimeofday(struct timeval* tv, struct timezone* tz) {
+	struct _timeb tb;
+	_ftime(&tb);
+	if ( tv ) {
+		tv->tv_sec = (long)tb.time;
+		tv->tv_usec = tb.millitm * 1000;
+	}
+	if ( tz ) {
+		tz->tz_minuteswest = tb.timezone;
+		tz->tz_dsttime = tb.dstflag;
+	}
+	return 0;
 }
 #endif
 
 HV_EXPORT unsigned int gettick_ms();
 HV_INLINE unsigned long long gettimeofday_ms() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return tv.tv_sec * (unsigned long long)1000 + tv.tv_usec/1000;
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return tv.tv_sec * ( unsigned long long )1000 + tv.tv_usec / 1000;
 }
 HV_INLINE unsigned long long gettimeofday_us() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return tv.tv_sec * (unsigned long long)1000000 + tv.tv_usec;
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return tv.tv_sec * ( unsigned long long )1000000 + tv.tv_usec;
 }
 HV_EXPORT unsigned long long gethrtime_us();
 

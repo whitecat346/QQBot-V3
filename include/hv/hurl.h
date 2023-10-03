@@ -7,28 +7,28 @@
 
 class HV_EXPORT HUrl {
 public:
-    static std::string escape(const std::string& str, const char* unescaped_chars = "");
-    static std::string unescape(const std::string& str);
-    static inline std::string escapeUrl(const std::string& url) {
-        return escape(url, ":/@?=&#+");
-    }
+	static std::string escape(const std::string& str, const char* unescaped_chars = "");
+	static std::string unescape(const std::string& str);
+	static inline std::string escapeUrl(const std::string& url) {
+		return escape(url, ":/@?=&#+");
+	}
 
-    HUrl() : port(0) {}
-    ~HUrl() {}
+	HUrl() : port(0) {}
+	~HUrl() {}
 
-    void reset();
-    bool parse(const std::string& url);
-    const std::string& dump();
+	void reset();
+	bool parse(const std::string& url);
+	const std::string& dump();
 
-    std::string url;
-    std::string scheme;
-    std::string username;
-    std::string password;
-    std::string host;
-    int         port;
-    std::string path;
-    std::string query;
-    std::string fragment;
+	std::string url;
+	std::string scheme;
+	std::string username;
+	std::string password;
+	std::string host;
+	int         port;
+	std::string path;
+	std::string query;
+	std::string fragment;
 };
 
 #endif // HV_URL_H_

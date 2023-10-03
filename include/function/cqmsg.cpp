@@ -3,12 +3,12 @@
 
 /*
   {
-    "action": "终结点名称, 例如 'send_group_msg'",
-    "params": {
-        "参数名": "参数值",
-        "参数名2": "参数值"
-    },
-    "echo": "'回声', 如果指定了 echo 字段, 那么响应包也会同时包含一个 echo 字段, 它们会有相同的值"
+	"action": "终结点名称, 例如 'send_group_msg'",
+	"params": {
+		"参数名": "参数值",
+		"参数名2": "参数值"
+	},
+	"echo": "'回声', 如果指定了 echo 字段, 那么响应包也会同时包含一个 echo 字段, 它们会有相同的值"
   }
  */
 std::string cqmsg::BotGroupMessageSend(unsigned int group_id, std::string msg, bool auto_escape, std::string echo)
@@ -111,7 +111,6 @@ std::string cqmsg::BotPrivateMessageSend(unsigned int user_id, unsigned int grou
 
 	return temp;
 }
-
 
 std::string cqmsg::BotGroupSetGroupKick(unsigned int group_id, unsigned int user_id, bool reject_add_request)
 {

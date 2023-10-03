@@ -48,8 +48,8 @@ typedef struct atomic_flag { atomic_bool _Value; } atomic_flag;
 
 #define ATOMIC_FLAG_TEST_AND_SET    atomic_flag_test_and_set
 static inline bool atomic_flag_test_and_set(atomic_flag* p) {
-    // return InterlockedIncrement((LONG*)&p->_Value, 1);
-    return InterlockedCompareExchange((LONG*)&p->_Value, 1, 0);
+	// return InterlockedIncrement((LONG*)&p->_Value, 1);
+	return InterlockedCompareExchange((LONG*)&p->_Value, 1, 0);
 }
 
 #define ATOMIC_ADD          InterlockedAdd
@@ -61,7 +61,7 @@ static inline bool atomic_flag_test_and_set(atomic_flag* p) {
 
 #define ATOMIC_FLAG_TEST_AND_SET    atomic_flag_test_and_set
 static inline bool atomic_flag_test_and_set(atomic_flag* p) {
-    return !__sync_bool_compare_and_swap(&p->_Value, 0, 1);
+	return !__sync_bool_compare_and_swap(&p->_Value, 0, 1);
 }
 
 #define ATOMIC_ADD          __sync_fetch_and_add
@@ -86,16 +86,16 @@ static inline bool atomic_flag_test_and_set(atomic_flag* p) {
 #ifndef ATOMIC_FLAG_TEST_AND_SET
 #define ATOMIC_FLAG_TEST_AND_SET    atomic_flag_test_and_set
 static inline bool atomic_flag_test_and_set(atomic_flag* p) {
-    bool ret = p->_Value;
-    p->_Value = 1;
-    return ret;
+	bool ret = p->_Value;
+	p->_Value = 1;
+	return ret;
 }
 #endif
 
 #ifndef ATOMIC_FLAG_CLEAR
 #define ATOMIC_FLAG_CLEAR           atomic_flag_clear
 static inline void atomic_flag_clear(atomic_flag* p) {
-    p->_Value = 0;
+	p->_Value = 0;
 }
 #endif
 

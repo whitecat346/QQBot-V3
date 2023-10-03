@@ -16,9 +16,8 @@ BEGIN_EXTERN_C
 
 #define HV_VERSION_NUMBER   ((HV_VERSION_MAJOR << 16) | (HV_VERSION_MINOR << 8) | HV_VERSION_PATCH)
 
-
 HV_INLINE const char* hv_version() {
-    return HV_VERSION_STRING;
+	return HV_VERSION_STRING;
 }
 
 HV_EXPORT const char* hv_compile_version();

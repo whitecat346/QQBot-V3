@@ -6,10 +6,8 @@
 #include "hbuf.h"
 
 namespace hv {
-
-typedef HBuf Buffer;
-typedef std::shared_ptr<Buffer>     BufferPtr;
-
+	typedef HBuf Buffer;
+	typedef std::shared_ptr<Buffer>     BufferPtr;
 }
 
 #endif // HV_BUFFER_HPP_

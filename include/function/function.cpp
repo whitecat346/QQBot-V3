@@ -2,7 +2,7 @@
 #include <string>
 
 #include "../hv/WebSocketClient.h"
-#include "../string/function.h"
+#include "../string/str.h"
 
 #include "cqmsg.h"
 
@@ -11,17 +11,14 @@
 // WebSocket Message
 void fileServer::OnMessage(const std::string& msg)
 {
-	
 }
 
 void fileServer::OnOpen()
 {
-	
 }
 
 void fileServer::fscave(std::string& msg)
 {
-	
 }
 
 // QQ Bot
@@ -62,7 +59,7 @@ void qqBot::OnMessage(const std::string& msg)
 	nlohmann::json omMsg = nlohmann::json::parse(msg);
 	if ( omMsg.find("post_type") != omMsg.end() )
 	{
-		if (omMsg.at("post_type") == "message" && omMsg.at("message").at(0) == '#' )
+		if ( omMsg.at("post_type") == "message" && omMsg.at("message").at(0) == '#' )
 		{
 			int group_id = omMsg.at("group_id");
 			std::string msgInfo = omMsg.at("message");
@@ -99,7 +96,6 @@ void qqBot::OnMessage(const std::string& msg)
 		/*{
 			if ( omMsg.find("echo") != omMsg.end() && omMsg.at("echo") == "system_request" )
 			{
-
 			}
 			else std::cout << "Get Data: " << omMsg.at("data") << std::endl;
 		}*/
@@ -154,7 +150,7 @@ void qqBot::ftalkBan(std::string& msg)
 	}
 	else
 	{
-		if ( str::BotFunction::EchoMessageGet(temp) == "true")
+		if ( str::BotFunction::EchoMessageGet(temp) == "true" )
 			msg = cqmsg::BotGroupSetGroupWholeBan(jmsg.at("group_id"), true);
 		else msg = cqmsg::BotGroupSetGroupWholeBan(jmsg.at("group_id"), false);
 	}
