@@ -1,7 +1,4 @@
-﻿D:\App\Microsoft Visual Studio\2022\Preview\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: 名为 function.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 include\function\function.cpp, include\string\function.cpp。
-  cqmsg.cpp
-C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\cqmsg.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  function.cpp
+﻿  function.cpp
 C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\hv\json.hpp(23033,19): error C2665: “nlohmann::detail::input_adapter”: 没有重载函数可以转换所有参数类型
 C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\hv\json.hpp(5075,31): message : 可能是“nlohmann::detail::input_stream_adapter nlohmann::detail::input_adapter(std::istream &&)”
 C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\hv\json.hpp(23033,19): message : “nlohmann::detail::input_stream_adapter nlohmann::detail::input_adapter(std::istream &&)”: 无法将参数 1 从“_Ty”转换为“std::istream &&”
@@ -97,13 +94,12 @@ C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\function.cpp(1
               InputType=std::string *
           ]
 C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\function\function.cpp(130,22): message : 请参阅 "qqBot::ftalkBan" 中对 "nlohmann::basic_json<std::map,std::vector,std::string,bool,int64_t,uint64_t,double,std::allocator,nlohmann::adl_serializer,std::vector<uint8_t,std::allocator<uint8_t>>>::parse" 的第一个引用
-  function.cpp
-C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(17,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(25,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(33,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(105,15): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(122,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-  main.cpp
+  str.cpp
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\str.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\str.cpp(17,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\str.cpp(25,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\str.cpp(33,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\str.cpp(105,15): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\str.cpp(122,14): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
   正在生成代码...
-C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\function.cpp(98): warning C4715: “str::BotFunction::CqCode_String”: 不是所有的控件路径都返回值
+C:\Users\yanyu\Desktop\Project\QQBot V3\QQBot V3\include\string\str.cpp(98): warning C4715: “str::BotFunction::CqCode_String”: 不是所有的控件路径都返回值
