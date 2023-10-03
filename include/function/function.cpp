@@ -38,20 +38,29 @@ extern std::map<std::string, bool> funED;
 extern std::map<std::string, int> fileIndex;
 extern void closeFunction(int closeCode = 0);
 
-void qqBot::OnOpen()
+void qqBot::ClientSend(const std::string msg)
 {
-	
+	// {...}	json msg
+	// $send <function> <msg>	File Server msg
+
+	if ( msg.at(0) == '$' )
+	{
+		if ( str::getFunName(msg) == "send" )
+			wsfileServer.send(str::fileServerAllInfo(msg));
+		else throw( "FIle Server Command Error1" );
+	}
+	else wsclient.send(msg);
 }
 
+void qqBot::OnOpen()
+{
+	std::cout << "OnOpen!" << std::endl;
+}
 
 void qqBot::OnMessage(const std::string& msg)
 {
 	nlohmann::json omMsg = nlohmann::json::parse(msg);
-	if ( omMsg.find("echo") != omMsg.end() && omMsg.at("echo") == "onopen")
-	{
-		
-	}
-	else if ( omMsg.find("post_type") != omMsg.end() )
+	if ( omMsg.find("post_type") != omMsg.end() )
 	{
 		if (omMsg.at("post_type") == "message" && omMsg.at("message").at(0) == '#' )
 		{
@@ -64,20 +73,7 @@ void qqBot::OnMessage(const std::string& msg)
 				{
 					std::string sendTemp = msg;
 					findex [funIndex ["f" + str::getFunName(msgInfo)]](sendTemp);
-					if ( str::getFunName(sendTemp) == "send" )
-					{
-						if ( it = fileIndex.find(str::fileServerGetFunctionName(sendTemp)); it != fileIndex.end() )
-						{
-							sendTemp = str::fileServerGetInfo(sendTemp);
-							fs [fileIndex ["fs" + str::fileServerGetFunctionName(sendTemp)]](sendTemp);
-							wsfileServer.send(sendTemp);
-						}
-						else
-						{
-							std::cout << "FileServer Command Not Found!" << std::endl;
-							closeFunction(0);
-						}
-					}
+					qqBot::ClientSend(sendTemp);
 				}
 				else
 				{
@@ -124,10 +120,24 @@ void qqBot::fecho(std::string& msg)
 {
 	nlohmann::json jmsg = nlohmann::json::parse(msg);
 	msg = cqmsg::BotGroupMessageSend(jmsg.at("group_id"),
-		str::BotFunction::EchoMessageGet(jmsg.at("message")));
+		str::BotFunction::EchoMessageGet(jmsg.at("message")), false, "!none!");
 }
 
 void qqBot::fcave(std::string& msg)
 {
-	
+	nlohmann::json jmsg = nlohmann::json::parse(msg);
+	msg = cqmsg::BotGroupMessageSend(jmsg.at("group_id"), "[ERROR] Function Not Enable!", false, "!none!");
+}
+
+void qqBot::ftalkBan(std::string& msg)
+{
+	nlohmann::json jmsg = nlohmann::json::parse(&msg);
+
+	// #talkBan @xiaopanTT 10
+	// #talkBan all
+	std::string temp = jmsg.at("message");
+	if ( str::BotFunction::GetCqCode(temp) != "false")
+	{
+		
+	}
 }
