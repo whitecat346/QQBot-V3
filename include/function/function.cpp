@@ -136,8 +136,26 @@ void qqBot::ftalkBan(std::string& msg)
 	// #talkBan @xiaopanTT 10
 	// #talkBan all
 	std::string temp = jmsg.at("message");
-	if ( str::BotFunction::GetCqCode(temp) != "false")
+	if ( str::BotFunction::GetCqCode(temp) != "false" )
 	{
-		
+		nlohmann::json cq = nlohmann::json::parse(str::BotFunction::GetCqCode(temp));
+
+		std::string stime = str::fileServerGetInfo(temp);
+		std::stringstream iss(stime);
+		int time = 0, user_id;
+		iss >> time;
+		iss.clear();
+		iss << cq.at("data").at("qq");
+		iss >> user_id;
+		iss.clear();
+
+		msg = cqmsg::BotGroupSetGroupBan(jmsg.at("group_id"), user_id, time);
+		return;
+	}
+	else
+	{
+		if ( str::BotFunction::EchoMessageGet(temp) == "true")
+			msg = cqmsg::BotGroupSetGroupWholeBan(jmsg.at("group_id"), true);
+		else msg = cqmsg::BotGroupSetGroupWholeBan(jmsg.at("group_id"), false);
 	}
 }
