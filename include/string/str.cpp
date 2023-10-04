@@ -10,7 +10,7 @@ inline std::string str::getFunName(std::string in)
 }
 
 inline std::string str::jrs_to_string(std::string in) { return in; }
-orpheus://orpheus/equalizer
+
 inline std::string str::fileServerGetFunctionName(std::string in)
 {
 	std::string out;
