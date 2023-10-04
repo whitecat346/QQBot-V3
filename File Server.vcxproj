@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\server\server.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +206,7 @@
     <ClInclude Include="include\hv\WebSocketParser.h" />
     <ClInclude Include="include\hv\WebSocketServer.h" />
     <ClInclude Include="include\hv\wsdef.h" />
+    <ClInclude Include="include\server\server.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitgnore" />

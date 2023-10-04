@@ -2,32 +2,23 @@
 
 #include <iostream>
 #include <string>
+#include "include/server/server.h"
 #include "include/hv/WebSocketServer.h"
-#include "include/hv/EventLoop.h"
-#include "include/hv/htime.h"
-#include <cstdlib>
 
 hv::WebSocketService wsService;
 
 int main(int argc, char ** argv)
 {
-	wsService.onopen = [ ] (const WebSocketChannelPtr& channe, const HttpRequestPtr& req)
-		{
-			std::cout << "onopen: GET " << req->Path() << std::endl;
-		};
-	wsService.onmessage = [ ] (const WebSocketChannelPtr& channe, const std::string& msg)
-		{
-			std::cout << "onmessage: " << (int)msg.size() << msg.data() << std::endl;
-		};
-	wsService.onclose = [ ] (const WebSocketChannelPtr& channe)
-		{
-			std::cout << "onclose" << std::endl;
-		};
+	wsService.onopen = WebSocketServer::OnOpen;
+	wsService.onmessage = WebSocketServer::OnMessage;
+	wsService.onclose = WebSocketServer::OnClose;
 
 	hv::WebSocketServer server(&wsService);
 	server.setPort(25565);
 	server.setThreadNum(4);
 	server.run();
+
+	while ( true );
 
 	return 0;
 }
